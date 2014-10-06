@@ -1,0 +1,56 @@
+<div class="col-3-layout">
+  <!-- Main Sidebar Menu -->
+  <left-panel></left-panel>
+  <!-- // Main Sidebar Menu END -->
+  
+  <!-- Content START -->
+  <div id="content">
+    <!-- <div class="layout-app">  -->
+    <div class="innerAll">
+      <div class="row">
+        <div class="col-lg-8 col-md-8">
+          <div class="inner-container">
+          <div class="timeline-cover">
+            <div class="widget">
+              <div class="widget-body padding-none margin-none">
+                <div class="innerAll"> <i class="fa fa-quote-left text-muted pull-left fa-fw"></i>
+                  <p class="lead margin-none">Profile Pic Upload</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-container">
+            <span class="ng-hide" ng-show="brokerloader"><img titile="" alt="" src="app/assets/images/ajax-loader.gif"></span>
+            <span class="msg" style="color:green">{{successMsg}}</span>
+            <div class="login-error" style="text-align: center; color: red;" data-ng-show="fileNotValid">{{fileNotValidMsg}}</div>
+			<form class="upload-prof-img" action="javascript:void(0)" ng-submit="uploaduserprofileimages();">
+				<ul>
+					<li>
+						<span>Upload Image</span>
+                        <div ng-show="imageSrc" class="upload-img-re">
+                            <img ng-src="{{imageSrc}}" width="200" height="200"/>
+                            <div class="remove-up"><i data-ng-click="removeImage()" class="fa fa-fw fa-times" title="Remove"></i></div>
+                        </div>
+                        <input type="file" ng-file-select="onFileSelect($files)"/>
+                        <div class="notice">For best result please upload 200 X 200 image or any other square image.</div>
+						<!-- <input type="file" file-model="myFile" required /> -->
+					</li>
+					
+					<li>
+						<button type="submit" id="addPhoto" ng-hide="albloader" class="btn btn-primary">Upload Image <i class="fa fa-fw fa-plus"></i></button>
+                        <div class="ng-hide" ng-show="albloader" style="text-align:center"><img titile="" alt="" src="app/assets/images/ajax-loader.gif"></div>
+                        <a href="#/profile" ng-hide="albloader" class="btn btn-primary">Cancel <i class="fa fa-fw fa-times"></i></a>
+					</li>
+				</ul>
+			</form>
+          </div>
+        </div>
+        </div>
+        <div class="col-md-4 col-lg-4">
+            <profile-right-panel></profile-right-panel>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- // Content END -->
+</div>

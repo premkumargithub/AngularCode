@@ -1,0 +1,83 @@
+<div class="col-2-layout">
+<div id="content" class="container-right-fluid-page" data-ng-controller="FriendProfile">
+    <!-- <div class="layout-app"-->
+    <div class="innerAll">
+      <div class="row">
+        <div class="col-lg-8 col-md-8">
+        <div class="inner-container">
+        <friend-Cover-Profile-Panel></friend-Cover-Profile-Panel>
+		<div ng-show="friendViewLoader" class="loader-container">
+			<img src="app/assets/images/ajax-loader.gif" alt="loading..." />
+		</div>	
+		<!--store details section-->
+		<div class="store-details-section" data-ng-hide="friendViewLoader">
+			<!--store profile section-->
+			<div class="store-dp-section friends-view-container">
+				<a class="btn btn-primary profile-add-friend" href="javascript:void(0)" ng-if="friendProfile.is_friend == 1 && friendProfile.user_id != currentUser.id" title="Remove Friend" data-ng-click="removeFriend(friendProfile.user_id)">Remove Friend</a>
+				<a class="btn btn-primary profile-add-friend" href="javascript:void(0)" ng-if="friendProfile.is_friend == 0 && friendProfile.is_sent == 1 && friendProfile.user_id != currentUser.id" title="Request sent already">Pending request</a>
+				<a data-ng-hide="sendFriendRequestLoader" class="btn btn-primary profile-add-friend " href="javascript:void(0)" ng-if="friendProfile.is_friend == 0 && friendProfile.is_sent == 0 && friendProfile.user_id != currentUser.id" title="Add as Friend" data-ng-click="sendFriendRequests(friendProfile.user_id)">Add Friend</a>
+				<a ng-if="friendProfile.is_friend == 2" class="btn btn-primary profile-add-friend" href="javascript:void(0)">Friend request sent</a>
+				<img class="sent-requestloading" data-ng-show="sendFriendRequestLoader" src="app/assets/images/ajax-loader.gif" alt="loading..." />
+			</div>
+		<!--store profile section-->			
+		<div class="friend-profile-container">				
+          <div class="form-container">
+				<ul>
+					<li>
+						<span>First Name:</span>
+						<span class="friend-detail">{{friendProfile.user_info.first_name}}</span>
+					</li>
+					<li>
+						<span>Last Name:</span>
+						<span class="friend-detail">{{friendProfile.user_info.last_name}}</span>
+					</li>
+					<li>
+						<span>Birthday:</span>
+						<span class="friend-detail">{{friendProfile.user_info.date_of_birth | date:'dd-MM-yyyy'}}</span>
+					</li>
+					<li>
+						<span>Gender:</span>
+						<span class="friend-detail" ng-if="friendProfile.user_info.gender == 'm'">Male</span>
+						<span class="friend-detail" ng-if="friendProfile.user_info.gender == 'f'">Female</span>
+					</li>
+					<li>
+						<span>Region:</span>
+						<span class="friend-detail"> </span>
+					</li>
+					<li>
+						<span>Zip:</span>
+						<span class="friend-detail"> </span>
+					</li>
+					<li>
+						<span>City:</span>
+						<span class="friend-detail"> </span>
+					</li>
+					<li>
+						<span>Address:</span>
+						<span class="friend-detail"> </span>
+					</li>
+					<li>
+						<span>Latitutde:</span>
+						<span class="friend-detail"> </span>
+					</li>
+					<li>
+						<span>Longitude:</span>
+						<span class="friend-detail"> </span>
+					</li>
+				</ul>
+          </div>
+		</div>			
+		</div>
+		<!--store details section-->
+		</div>
+        </div>
+		
+		<div class="col-lg-4 col-md-4">
+			<profile-Right-Panel></profile-Right-Panel>
+        </div>	
+      </div>
+    </div>
+  </div>
+  <!-- // Content END -->
+<div class="clearfix"></div>
+</div>

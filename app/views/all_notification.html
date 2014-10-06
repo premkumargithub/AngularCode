@@ -1,0 +1,33 @@
+<a href="javascript:void(0)" data-ng-click="showAllNotification()"><i class="fa fa-bell" data-ng-show="!FriendRequests.length"></i>
+<i class="fa fa-bell noti" data-ng-show="FriendRequests.length"></i>
+<div class="total-notification" data-ng-show="FriendRequests.length">{{FriendRequests.length}}</div>
+</a>
+<div ng-show="showNotificationList">
+<ul class="add-request-accept" data-ng-show="loadNotification">
+	<li class="accept-center">
+		<img src="app/assets/images/proceed.gif">
+	</li>
+</ul>
+<div data-ng-hide="loadNotification">
+<ul class="add-request-accept" data-ng-show="{{FriendRequests.length != 0}}">
+	<li data-ng-repeat="item in FriendRequests" id="top-request-{{$index}}">
+		<div class="add-friend-img">
+			<img title="Friend request" alt="No image available" src="app/assets/images/dummy60X60.jpg" width="50" ng-if="item.user_info.profile_image_thumb == ''"/>
+			<img title="Friend request" alt="" src="{{item.user_info.profile_image_thumb}}" width="50" ng-if="item.user_info.profile_image_thumb != ''"/>
+		</div>
+		<div class="add-friend-right">
+			<h3><a href="javascript:void(0)">{{item.user_info.first_name}} {{item.user_info.last_name}}</a></h3>
+			<div class="add-friend-accept" >
+				<input type="button" title="Accept request" ng-click="AcceptRequest(item.friend_id, $index)" value="Add Friend" class="ad-accept">
+				<input type="button" title="Reject request" ng-click="RejectRequest(item.friend_id, $index)" value="Reject" class="re-reject">
+			</div>
+		</div>
+	</li>
+</ul>
+<ul class="add-request-accept" data-ng-show="!FriendRequests.length">
+	<li>
+		There's no notification
+	</li>
+</ul>
+</div>
+</div>

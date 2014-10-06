@@ -1,0 +1,22 @@
+<div class="project-wall"  scroller="" loading-method="loadMore()">
+    <div class="project"  data-ng-repeat = "group in userGroupList">
+        <a href="#/club/view/{{group.group_id}}/{{group.group_status}}">
+            <div class="tile-head">
+                <h2>{{group.group_title}}</span></h2>
+                <div class="visitors"><i class="fa fa-user"></i> {{group.members.length}} members</div>
+            </div>
+            <ul>
+                <li>
+                    <span data-ng-if="group.profile_img_thumb != '' " style="background-image:url('{{group.profile_img_thumb}}');"></span>
+                    <span data-ng-if="group.profile_img_thumb == '' " style="background-image:url('app/assets/images/club-list-grid-thumb.png');">
+                    </span>
+                    <!-- <img ng-src="{{group.profile_img_thumb}}" data-ng-if="group.profile_img_thumb != '' " alt="{{group.group_title}}">
+                    <img src="app/assets/images/default_group.png" data-ng-if="group.profile_img_thumb == '' " alt="No image available"> -->
+                </li>
+            </ul>
+            <h3>{{group.group_description}}</h3>
+            <div data-ng-if="group.is_member == 0" class="btn-no-bg" data-ng-click="joinPublicGroups(group.group_id)">+ Entra Nel Gruppo</div>
+        </a>
+        <a class="close-btn btn btn-primary" href="javascript:void(0);" data-ng-if="group.owner_id == currentUser.id" data-ng-click='deleteGroup($index)'><i class="fa fa-fw fa-times"></i></a>
+    </div>
+</div>

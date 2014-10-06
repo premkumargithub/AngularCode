@@ -1,0 +1,24 @@
+<div class="navbar hidden-print navbar-default box main nav-head" role="navigation">
+<div class="register-header-section">
+  <div class="logo logo-head"> <a href="#"><img src="app/assets/images/logo-head.png"></a></div>
+  <form name="user" method="POST" data-ng-submit="getLogin()" >
+  	<div class="register-login-section-form">
+  <ul class="register-login-section">
+	<li>
+		<input type="email" value="" name="email" placeholder="Email" data-ng-model="user.userName" title="Enter email" required/>
+	</li>
+	<li>
+		<input type="password"  value="" placeholder="Password" data-ng-model="user.password" data-ng-minlength="6" title="Enter password" required />
+	</li>
+	<li>
+		<input data-ng-hide="loginStart" type="submit" title="Login" value="Log In" />
+		<img class="login-img" data-ng-show="loginStart" src="app/assets/images/ajax-loader-login.gif" alt="loading..." />
+	</li>
+	<li class="forgot-passowrd-text"><a href="#/password/forgot" title="Forgot password">Forgot Your Password?</a></li>
+  </ul>
+  <div class="login-error errormsg errlogin" data-ng-show="loginError">{{loginErrorMsg}}
+  </div>
+  </div>
+</form>
+  </div>
+</div>

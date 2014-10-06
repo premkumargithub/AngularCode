@@ -1,0 +1,31 @@
+<div class="store-album-section">
+	<span class="errorMsg">{{postErrMsg}}</span>
+	<div class="store-dp-album-post">
+		<ul class="store-post-photos">
+			<li><a href="javascript:void(0)" ng-class="isImage ? '' : 'post-active' " data-ng-click="addPost()"><img src="app/assets/images/store-post.png" alt="" titile="" /> Post</a></li>
+			<li class="last" ><a href="javascript:void(0)"  ng-class="isImage?'post-active' : '' " data-ng-click="addImage()"><img src="app/assets/images/store-post-capture.png" alt="" titile="" /> Photos</a></li>
+		</ul>
+	</div>
+	<form>
+	<div class="store-dp-post-textarea">
+		<textarea name="createPost" placeholder="You can upload pics, and share your posts here" data-ng-model="postText" data-ng-hide="uploadBox"></textarea>
+		<div ng-show="imageSrc" ng-repeat="img in imageSrc track by $index" class="preview-image-list">
+			<img ng-src="{{img}}" width="100" height="100" style="padding:10px;" />
+			<i data-ng-click="removeImage($index)" class="fa fa-fw fa-times" title="Remove"></i>
+		</div>
+		<div class="file-upload-btn btn" data-ng-show="isUpload">
+                    <input type="file" class="upload" ng-file-select="onFileSelect($files)"/>
+         </div>
+         <ul class="store-dp-video-capture" data-ng-show="uploadBox">
+			<li><div class="store-upload-photo-video">Upload Photos</div> 
+				<input type="file" ng-file-select="onFileSelect($files)"/>
+			</li>
+			<!-- <li class="last"><div class="store-upload-photo-video">Create Photo Album</div><input type="file" name="Create Photo Album" value="Create Photo Album"></li> -->
+		</ul>
+		<div class="postcom" data-ng-hide="uploadBox">
+			<a data-ng-hide="postContentStart" class="btn btn-primary" href="javascript:void(0)" ng-click="createPost()">Post</a>
+            <img data-ng-show="postContentStart" src="app/assets/images/proceed.gif" alt="" title="Loading..." />
+        </div>
+	</div>
+	</form>
+</div>

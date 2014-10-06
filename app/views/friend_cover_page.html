@@ -1,0 +1,34 @@
+<div class="store-dp-section">
+	<div class="store-dp-section-img">
+	<a ng-if="friendProfile.user_info.cover_image_thumb == ''" style="background-image:url('app/assets/images/store-credit.jpg')">
+	</a> 
+	<a class="fancybox" ng-if="friendProfile.user_info.cover_image_thumb != ''" href="{{friendProfile.user_info.cover_image}}" style="background-image:url({{friendProfile.user_info.cover_image_thumb}})">
+	</a>
+	</div>
+	<div class="profile-dp-section">
+	<div class="profile-dp">
+		<a ng-if="friendProfile.user_info.profile_image_thumb == ''" style="background-image:url('app/assets/images/profile-dp.jpg')">
+		</a> 
+		<a class="fancybox" ng-if="friendProfile.user_info.profile_image_thumb != ''" href="{{friendProfile.user_info.profile_image}}" style="background-image:url({{friendProfile.user_info.profile_image_thumb}})">
+		</a>
+	</div>
+	<h3><a href="#/viewfriend/{{friendProfile.user_info.id}}" my-refresh>{{friendProfile.user_info.first_name}} {{friendProfile.user_info.last_name}}</a></h3>
+		<ul class="store-invitations">
+		<li ng-class="{ 'dp-active': friendlineActive == 'about' }">
+		<a href="#/viewfriend/{{friendProfile.user_info.id}}">About</a>
+		</li>
+		<li ng-class="{ 'dp-active': friendlineActive == 'friends' }">
+		<a href="#/{{friendProfile.user_info.id}}/friends" my-refresh>Friends <span class="invitations-number"> </span></a>
+		</li>
+		<li ng-class="{ 'dp-active': friendlineActive == 'album' }">
+		<a href="#/album">Pictures</a>
+		</li>
+		<li ng-class="{ 'dp-active': friendlineActive == 'shope' }">
+		<a href="#/{{friendProfile.user_info.id}}/shops">Shops</a>
+		</li>
+		<li ng-class="{ 'dp-active': friendlineActive == 'club' }">
+		<a href="#/{{friendProfile.user_info.id}}/clubs">Clubs <span class="invitations-number"></span></a>
+		</li>
+		</ul>
+	</div>
+</div>

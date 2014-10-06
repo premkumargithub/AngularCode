@@ -1,0 +1,107 @@
+	<div class="col-2-layout">
+	<!-- Content START -->
+	<div id="content" class="container-right-fluid-page" data-ng-controller="AlbumController">
+		<!-- <div class="layout-app/">  -->
+		<div class="innerAll">
+			<div class="row">
+				<div class="col-lg-8 col-md-8">
+				<div class="inner-container">
+					<!--album section left -->
+					<div class="album-section-left">
+						<!--album section left conntainer -->
+						<div class="album-section-container-top imgupload">
+
+
+				<div ng-controller="UserCoverProfileController">
+					
+					<!--This directive will set the time line  image on alubum pic-->
+						<user-Cover-Profile-Panel></user-Cover-Profile-Panel>
+							</div>
+
+
+							<div class="heading">Album : {{albumname}}</div>
+							<div class="msgDisp" style="color:green">{{albumResponse}}</div>
+							<div class="uploadcontainer">
+								<div class="album-online">
+									<span class="album-status"><img titile="" alt="" src="app/assets/images/album.png"></span> Image Upload 
+								</div>
+								
+								<form ng-submit="uploadmediaAlbum()">
+								<div class="login-error" style="text-align: center; color: red;" data-ng-show="fileNotValid">{{fileNotValidMsg}}
+								</div>
+								<ul class="album-action-message">
+									<li class="last"><a href="javascript:void(0)">
+                        				<input type="file" ng-multi-file-select="onFileSelect($files)" multiple accept="image/*"/>
+									</li>
+									<li class="last"><a href="javascript:void(0)">
+										<button type="submit" id="addbutton" class="btn btn-primary">Add Photos <i class="fa fa-fw fa-plus"></i></button>
+										<span class="ng-hide" ng-show="uploadloader"><img titile="" alt="" src="app/assets/images/ajax-loader.gif"></span>
+									</li>
+								</ul>
+								</form>
+								<ul>
+									<li><a class="btn btn-primary" href="#/album">Back to Album</a></li>
+								</ul>
+							</div>
+							<div class="preview-images">
+							<div ng-show="imageSrc" ng-repeat="img in imageSrc" class="preview-image-list">
+							<img ng-src="{{img}}" width="100" height="100" style="padding:10px;" />
+							<i data-ng-click="removeImage($index)" class="fa fa-fw fa-times" title="Remove"></i>
+							</div>
+							</div>
+						</div>
+						<!--album section left conntainer -->
+
+						<div class="album-option-container" infinite-scroll="loadMoreImage()" infinite-scroll-distance="3">
+							<div class="ng-hide" style="text-align:center" ng-show="albloader"><img titile="" alt="" src="app/assets/images/ajax-loader.gif"></div>
+							<ul class="album-option" ng-if="viewalbum.length">
+
+								<!--album container-->
+								<li data-ng-repeat="item in viewalbum">
+									<a class="view-album-img fancybox" href="{{item.media_path}}" style="background-image:url('{{item.thumb_path}}');" rel="maingallery"></a>
+									<span class="album-delete-image-internal" ><a class="close-btn"><i class="fa fa-fw fa-gear"></i></a>
+									<div class="album-gear-pop">
+										<a href="javascript:void(0);" ng-click="confirmClick() && deleteMediaAlbum(item.id)" confirm-click>Delete This Photo</a>
+										<a id="featuredloaderlink-{{$index}}" class="profileimg" ng-click="setuserprofileimages(item.id, $index)" title="Set as profile Image">Make Profile Picture</a>
+										<span class="sideloader" style="display:none;" id="featuredloader-{{$index}}"><img titile="" alt="" src="app/assets/images/ajax-loader.gif"></span>
+									</div>
+									</span>
+									
+								</li>
+								
+								<!--album container-->
+
+							</ul>
+							<div class="ng-hide" style="text-align:center" ng-show="listload"><img titile="" alt="" src="app/assets/images/ajax-loader.gif"></div>
+							<div class="album-option ng-hide album-blank" ng-if="!viewalbum.length" ng-show="noPhotos">
+									There are no images currently available.
+							</div>
+							
+						</div>
+
+					</div>
+					<!--album section left -->
+				</div>
+				</div>
+				<div class=" col-lg-4 col-md-4">
+					<profile-right-panel></profile-right-panel>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- // Content END -->
+
+	<div class="clearfix"></div>
+</div>
+	<!-- // Sidebar menu & content wrapp/er END --> 
+
+	<!-- Footer -->
+	<div id="footer" class="hidden-print"> 
+
+		<!--  Copyright Line -->
+		<div class="copy">&copy; 2012 - 2014 - <a href="http://www.mosaicpro.biz">MosaicPro</a> - All Rights Reserved. <a href="http://themeforest.net/?ref=mosaicpro" target="_blank">Purchase Social Admin Template</a> - Current version: v2.0.0-rc8 / <a target="_blank" href="app/assets/app/app/CHANGELOG.txt?v=v2.0.0-rc8">changelog</a></div>
+		<!--  End Copyright Line --> 
+
+	</div>
+
+	<!-- // Footer END --> 

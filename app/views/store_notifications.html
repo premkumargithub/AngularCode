@@ -1,0 +1,31 @@
+<aside data-ng-controller="StoreNotificationController">
+	<div class="adver-mutal">
+			<div class="adver-mutal-section">
+				<h1>Cereca Amic</h1>
+			</div>
+			<div class="adver-mutal-second">
+			<div class="people-you-may-know-panel">
+				<div class="people-may-know">Notifications</div>
+				<div class="people-may-see-all"><a href="javascript:void(0)"></a></div>
+			</div>
+			<ul class="adver-mutal-friend" data-ng-show="NotificationFound">
+			<li data-ng-repeat="item in storeNotification">
+				<div class="adver-mutal-friend-img">
+				<img style="width:64px; height=64px;" src="{{item.profile_image_thumb}}" data-ng-if="item.profile_image_thumb != '' " alt="" title="Request from store"/>
+            	<img style="width:64px; height=64px;" src="app/assets/images/dummy60X60.jpg" data-ng-if="item.profile_image_thumb == '' " alt="No image available" title="Request from store"/>
+				</div>
+				<div class="adver-mutual-friend-right-section">
+					<h3><a href="#/store/view/{{item.store_id}}" title="View Store">{{item.businessName}}</a></h3>
+					<div class="adver-mutal-add-friend" id="noti-{{$index}}">
+						<input type="button" value="Accept" ng-click="AcceptRequest(item.store_id, item.request_id, $index)" title="Accept" />
+						<input type="button" value="Reject" ng-click="rejectRequest(item.store_id, item.request_id, $index)" title="Reject"/>
+					</div>
+				</div>
+			</li>
+			</ul>
+			<div data-ng-show="NotificationNotFound">
+			No store request
+			</div>
+			</div>
+		</div>
+	</aside>

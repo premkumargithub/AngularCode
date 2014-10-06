@@ -1,0 +1,27 @@
+<div class="project-wall">
+	<div class="project storecoverid{{store.id}}" data-ng-repeat="store in storeListObject" >
+		<a href="#/shope/view/{{store.id}}" >
+			<div class="tile-head"><h2>{{store.businessName}}</h2></div>
+			<ul>
+				<li>
+				<!-- <a href="#/shope/view/{{store.id}}" data-ng-if="store.profile_image_thumb != '' "> -->
+				<!-- <img data-ng-if="store.profile_image_thumb != '' " src="{{store.profile_image_thumb}}" alt="{{store.businessName}}" title="{{store.businessName}}" /> -->
+
+				<span data-ng-if="store.profile_image_thumb != '' "style="background-image:url('{{store.profile_image_thumb}}');">
+				</span>
+				<!-- </a> -->
+			<!-- <a href="#/shope/view/{{store.id}}" data-ng-if="store.profile_image_thumb == '' " > -->
+           <!--  <img data-ng-if="store.profile_image_thumb == '' " src="app/assets/images/store-prod.jpg" alt="No image available" /> -->
+
+            <span data-ng-if="store.profile_image_thumb == '' " style="background-image:url('app/assets/images/store-prod.jpg');">
+				</span>
+            <!-- </a> -->
+            </li>
+			</ul>
+			<h3>Owner-{{store.user_info.username}}</h3> 
+		</a>
+			<a id="store{{store.id}}" ng-if="store.user_info.id == currentUser.id" href="javascript:void(0)" class="close-btn btn btn-primary " title="Delete Shope" ng-click="confirmClick() && deleteStoreGrid(store.id, store.parentStoreId)" confirm-click>
+			<i class="fa fa-fw fa-times"></i>
+			</a>
+	</div>
+</div>

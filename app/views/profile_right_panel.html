@@ -1,0 +1,110 @@
+<aside data-ng-controller="ProfileNotiController">
+		<div class="adver-mutal">
+			<div class="adver-mutal-section">
+				<h1>Cereca Amic</h1>
+				 <div class="noti-drop"><a href="javascript:void(0)"><img src="app/assets/images/noti-drop.png" alt="" /></a>
+				     <ul class="not-drop-section hidden">
+				       	<li><a href="javascript:void(0)">Sixth Continent 1</a></li>
+				       	<li><a href="javascript:void(0)">Sixth Continent 2</a></li>
+				       	<li><a href="javascript:void(0)">Sixth Continent 3</a></li>
+				       	<li><a href="javascript:void(0)">Sixth Continent 4</a></li>
+				     </ul>
+			     </div>
+			</div>
+			<div class="adver-mutal-second">
+			<div class="people-you-may-know-panel">
+				<div class="people-may-know">Notifications</div>
+				<div class="people-may-see-all"><a href="javascript:void(0)"></a></div>
+			</div>
+			<ul class="adver-mutal-friend" data-ng-show="NotificationFound">
+			<li data-ng-repeat="item in FriendRequests" ng-class="{'last':$last}">
+				<div class="adver-mutal-friend-img">
+					<a  href="#/viewfriend/{{item.user_info.id}}" title="View user profile">
+				<img style="width:64px; height=64px;" src="{{item.user_info.profile_image_thumb}}" data-ng-if="item.user_info.profile_image_thumb != '' " alt="" title="Friend request from {{item.user_info.username}}"/></a>
+				<a  href="#/viewfriend/{{item.user_info.id}}" title="View user profile">
+            	<img style="width:64px; height=64px;" src="app/assets/images/dummy60X60.jpg" data-ng-if="item.user_info.profile_image_thumb == '' " alt="No image available" title="Friend request from {{item.user_info.username}}"/></a>
+				</div>
+				<div class="adver-mutual-friend-right-section">
+					<h3><a href="#/viewfriend/{{item.user_info.id}}" title="View user profile">{{item.user_info.first_name}} {{item.user_info.last_name}}</a></h3>
+					<div class="adver-mutal-add-friend" id="noti-{{$index}}">
+						<input class="val-accept" type="button" value="Add Friend" ng-click="AcceptRequest(item.friend_id, $index)" title="Accept request" />
+						<input  class="val-reject" type="button" value="Reject" ng-click="RejectRequest(item.friend_id, $index)" title="Reject request"/>
+					</div>
+				</div>
+			</li>
+			</ul>
+			<div data-ng-show="NotificationNotFound">
+			No friend request
+			</div>
+			</div>
+		</div>
+	<div class="top-citizen-section">
+		<div class="citizen-head">Top 50 Linked Citizens</div>
+		<ul>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen1.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen2.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen3.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen4.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen5.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen6.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen7.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen8.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen9.jpg"></a></li>   
+		</ul>
+	</div>
+	<div class="top-citizen-section">
+		<div class="citizen-head">Top 50 Citizens per Income</div>
+		<ul>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen1.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen2.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen3.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen4.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen5.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen6.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen7.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen8.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen9.jpg"></a></li>   
+		</ul>
+	</div>
+	<div class="top-citizen-section">
+		<div class="citizen-head">Top 50 Shops per Revenues</div>
+		<ul>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen1.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen2.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen3.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen4.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen5.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen6.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen7.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen8.jpg"></a></li>
+		<li><a href="javascript:void(0)"><img src="app/assets/images/citizen9.jpg"></a></li>   
+		</ul>
+	</div>
+	<a href="javascript:void(0)" class="inviti-citi-link">
+		<h2>INVITA NEGOZI E AMICI</h2>
+	</a>
+	<div class="top-citizen-section app">
+		<div class="citizen-head">Links</div>
+		<div class="links-section">
+			<h3>Esercente</h3>
+			<a href="javascript:void(0)"><img src="app/assets/images/gplay-button.png"></a>
+			<a href="javascript:void(0)"><img src="app/assets/images/appstore-button.png"></a>
+			<h3 class="consumatore">Consumatore</h3>
+			<a href="javascript:void(0)"><img src="app/assets/images/gplay-button.png"></a>
+			<a href="javascript:void(0)"><img src="app/assets/images/appstore-button.png"></a>
+		</div>
+	</div>
+	<div class="networks-listing">
+	<ul>
+	<li><a href="">Privacy</a></li>
+	<li><a href="">Contacts</a></li>
+	<li>
+	<div class="network-title">Network</div>
+	<div class="network-image">
+	<a href=""><img src="app/assets/images/network1.jpg" alt=""></a>
+	<a href=""><img src="app/assets/images/network2.jpg" alt=""></a>
+	</div>
+	</li>
+	</ul>
+	</div>
+</aside>

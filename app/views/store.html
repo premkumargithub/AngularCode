@@ -1,0 +1,50 @@
+<div class="col-2-layout">
+<div id="content" class="container-right-fluid-page">
+<div class="innerAll">
+  <div class="row">
+    <div class="col-lg-8 col-md-8">
+    <div class="inner-container">
+        <user-Cover-Profile-Panel></user-Cover-Profile-Panel>
+    	<article class="social-project store-grid">
+       <div class="social-heading">
+			<span class="store-head"><img src="app/assets/images/store-head.png" alt="" /></span>
+			<span>Shops</span>
+			<a class="btn btn-primary create-group-link" href="#shope/create">Create Shop</a>
+		</div>
+       <div class="wrap-select">
+			<ul class="for-resp">
+				<li><a class="voti {{viewAllActive}}" href="javascript:void(0)" ng-click="showStoreList('viewAll')">View All</a></li>
+				<li><a class="voti {{myStoreActive}}" href="javascript:void(0)" ng-click="myStoreList('myStore')">My Shop</a></li>
+			</ul>
+       <div class="search-list"> 
+       <search>
+            <form role="search" method="GET" id="" action="">
+                <input type="text" class="searchid" placeholder="Search shop" data-ng-model="searchTitle" data-ng-change="searchStore()"/>
+            </form>
+       </search> 
+	   
+	   <ul class="visualizzazione">
+        	<li class="{{listActive}}"><a href="javascript:void(0)" data-ng-click="changeView('list')" title="List Views"><i class="fa fa-list"></i></a></li>
+         <li class="{{gridActive}}"><a href="javascript:void(0);" data-ng-click="changeView('grid')" title="Grid Views"><i class="fa fa-table"></i></a></a></li>
+       </ul>
+	   </div>   
+       </div>
+       <div infinite-scroll="loadMore()" infinite-scroll-distance="3">
+            <div class="loader-container" data-ng-show="notFound">No result found</div>
+            <store-grid data-ng-show="gridActive == 'active'"></store-grid>
+            <store-list data-ng-show="listActive == 'active'"></store-list>
+        <div ng-show="storeLoading" class="loader-container">
+            <img src="app/assets/images/ajax-loader.gif" alt="loading..." />
+        </div>
+        </div>
+    </article>
+    </div>
+    </div>
+    <div class="col-lg-4 col-md-4">
+    <store-Notification-Panel></store-Notification-Panel>
+    </div>
+  </div>
+</div>
+</div>
+<div class="clearfix"></div>
+</div>

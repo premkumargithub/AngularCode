@@ -1,0 +1,135 @@
+<div class="total-counter">
+    <div class="titleCouter">
+        <div class="blueFont"> TOTALE ECONOMIA SPOSTATA </div>
+        <div class="contatore">
+            <div style="background-position: 0px -0px; " class="digitCounter"></div>
+            <div style="background-position: 0px -0px; " class="digitCounter"></div>
+            <div style="background-position: 0px -0px;  margin-right:5px; " class="digitCounter"></div>
+            <div style="background-position: 0px -0px; " class="digitCounter"></div>
+            <div style="background-position: 0px -75px; " class="digitCounter"></div>
+            <div style="background-position: 0px -151px;  margin-right:5px; " class="digitCounter"></div>
+            <div style="background-position: 0px -227px; " class="digitCounter"></div>
+            <div style="background-position: 0px -303px; " class="digitCounter"></div>
+            <div style="background-position: 0px -454px;  margin-right:5px; " class="digitCounter"></div>
+            <div class="symbolEuro"></div>
+            <br>
+            <br>
+        </div>
+    </div>
+</div>
+
+<div class="navbar hidden-print navbar-default box main" role="navigation">
+    <div class="logo"> <a href="#/"><img src="app/assets/images/logo.png"></a></div>
+    <div class="header-right-sec">
+        <div class="user-action pull-right menu-right-hidden-xs menu-left-hidden-xs border-left">
+            <div class="text-counter">
+                <span class="reddito">
+                <a href="#/timeline/{{currentUser.id}}" my-refresh>{{currentUser.basicProfile.firstname}}</a></span>
+                <span>€1,756.890</span>
+            </div>
+            <div class="dropdown username pull-left"> 
+                <a class="dropdown-toggle dropdown-hover" data-toggle="dropdown" href="javascript:void(0)">
+                    <span class="media margin-none"> 
+                    <span class="pull-left border-left border-right">
+                    <img ng-if="currentUser.basicProfile.profile_img == ''" src="app/assets/images/profile.jpg" alt="Profile">
+                    <img ng-if="currentUser.basicProfile.profile_img != ''" src="{{currentUser.basicProfile.profile_img.thumb}}" alt="Profile">
+                    </span> 
+                    <span class="header-arrow border-right">
+                        <img alt="" src="app/assets/images/header-arrow.png">
+                    </span>
+                    </span> 
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#/">Dashboard</a></li>
+                    <li><a href="#/about">Profile</a></li>
+                    <li><a href="#/edit_profile">Edit Profile</a></li>
+                    <li><a href="#/message">Messages</a></li>
+                    <li><a href="#/club" >Clubs</a></li>
+                    <li><a href="#/changepassword">Change Password</a></li>
+                    <li>
+                    <li><a href="#/shope/create">Create Shop</a></li>
+                    <li><a href="#/shope">Manage Shops</a></li>
+                    </li>
+                    <li>
+                    <ul ng-if="currentUser.basicProfile.broker_profile == 0">
+                    <li><a href="#/createbrokerprofile">Create Broker Profile</a></li>
+                    </ul>
+                    </li>
+                    <li><a href="javascript:void(0)" data-ng-click="logout()">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="pull-right border-left header-icons notification"> 
+            <message-notification></message-notification>
+        </div>
+         <div class="pull-right border-left header-icons notification">
+             <all-Notification-Panel></all-Notification-Panel>
+         </div>
+    </div>
+    <div id="header-search" data-ng-controller="ProfileController">
+            <form action="" autocomplete="on">
+            <input id="search" name="search" type="text" placeholder="Search a Friend" data-ng-change="searchUser()"  data-ng-model="searchFrind" data-ng-blur="clearList()">
+            <!-- <input id="search_submit" value="" type="submit"> -->
+            <div class="header-top-search-field-panel" data-ng-show="showList">
+                <ul class="header-top-search-field" >
+                    <li data-ng-repeat="user in userList" ><a data-ng-click="clearList();" href="#/viewfriend/{{user.user_id}}" >
+                    <div class="search-field-img">
+                    <img data-ng-if="user.user_info.profile_image == ''" src="app/assets/images/dummy32X32.jpg" alt="Profile" class="img-circle">
+                    <img data-ng-if="user.user_info.profile_image != ''" src="{{user.user_info.profile_image_thumb}}" width="40" height="40"></div>
+                    <div class="search-filed-text-section">
+                    <div class="search-field-name">{{user.user_info.first_name}} {{user.user_info.last_name}}
+                    </div> 
+                    <div class="search-field-email">{{user.user_email}}</div>
+                    </div></a>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+    <!--<div class="user-action user-action-btn-navbar pull-left"> <a href="#profile" class="btn btn-sm btn-navbar btn-open-left"><i class="fa fa-bars fa-2x"></i></a> 
+    </div>
+    <div class="input-group pull-left" data-ng-controller="ProfileController"> 
+        <span class="input-group-addon"></span>
+        <input type="text" class="form-control" placeholder="Search a User" data-ng-change="searchUser()"  data-ng-model="searchFrind" data-ng-blur="clearList()"/>
+        <div class="header-top-search-field-panel" data-ng-show="showList">
+            <ul class="header-top-search-field" >
+                <li data-ng-repeat="user in userList" ><a data-ng-click="clearList();" href="#/viewfriend/{{user.user_id}}" >
+                <div class="search-field-img">
+                <img data-ng-if="user.user_info.profile_image == ''" src="app/assets/images/dummy32X32.jpg" alt="Profile" class="img-circle">
+                <img data-ng-if="user.user_info.profile_image != ''" src="{{user.user_info.profile_image}}" width="40" height="40"></div>
+                <div class="search-filed-text-section">
+                <div class="search-field-name">{{user.user_info.first_name}} {{user.user_info.last_name}}
+                </div> 
+                <div class="search-field-email">{{user.user_email}}</div>
+                </div></a>
+                </li>
+            </ul>
+        </div>
+    </div>-->
+</div>
+<nav class="nav-container">
+    <!-- Static navbar -->
+    <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active home"><a href="#/">Home</a></li>
+                <li><a href="#/cos_e_e_come_funziona">Cos'è e come Funziona</a></li>
+                <li><a href="#/momosy">MoMoSy</a></li>
+                <li><a href="#/redditi">Redditi</a></li>
+                <li><a href="#/negozi_e_imprese">Negozi e Imprese</a></li>
+                <li><a href="#/progetti_sociali">Progetti Sociali</a></li>
+                <li><a href="#/market">Market</a></li>
+                <li><a href="#/diventa_manager">Diventa Manager</a></li>
+                <li><a href="#/change_language">Change Language</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>

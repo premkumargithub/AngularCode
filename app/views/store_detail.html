@@ -1,0 +1,203 @@
+<div class="col-2-layout">
+<div class="container-right-fluid-page" id="content" data-ng-controller="DeatilStoreController">
+	<div ng-show="storeLoading" class="loader-container">
+		<img src="app/assets/images/ajax-loader.gif" alt="loading..." />
+	</div>
+	<div ng-hide="storeLoading" class="innerAll">
+		<div class="row">
+			<div class="col-lg-8 col-md-8" data-ng-hide="showEditForm">
+			<div class="inner-container">
+			<div class="gruop-search-bar" ng-if="storeDetail.owner_id == currentUser.id">
+				<div class="gruop-bar-btn">
+				<a href class="btn btn-primary invite-user-link" data-ng-click="toggleInvite()">Invite Users</a>
+				</div>
+			</div>
+			<form class="invite-user gruop-bar-form" >
+				<div class="login-error" style="text-align: center; color: red;" data-ng-show="uploadProfileerror">{{uploadProfileErrorMsg}}
+				</div>
+           </form>
+	        <form class="invite-user gruop-bar-form" data-ng-show="showInvite">
+				<div ng-include src="'app/views/autocomplete.html'"></div>
+           </form>
+			<!--store details section-->
+			<div class="store-details-section">
+			<!--store profile section-->
+			<div class="store-dp-section">
+			<div class="store-dp-section-img">
+			<div id="invalidCoverImage" style="color:red; display:none;">{{invalidCoverImageMgs}}</div>
+			<div ng-show="uploadStoreProfile" class="cover-loader"><img src="app/assets/images/proceed.gif" alt="uploading..." /></div>
+        		<a data-ng-if="storeDetail.profile_image_original == '' "  style="background-image:url('app/assets/images/store-credit.png')">
+				</a> 
+				<a class="fancybox" data-ng-if="storeDetail.profile_image_original != '' " href="{{storeDetail.profile_image_original}}" style="background-image:url({{storeDetail.cover_image_path}})">
+				</a>
+			</div>
+			<div class="profile-dp-section">
+				<div class="profile-cover-dp">
+				<div class="profile-cover-cap" ng-show="storeDetail.owner_id == currentUser.id">
+				<label for="file">
+					<div class="add-cover-cap"><img src="app/assets/images/camera.png"></div>
+					<div class="add-cover-pic" ng-if="storeDetail.profile_image_original == ''">Add Cover Photo</div>
+					<div class="add-cover-pic" ng-if="storeDetail.profile_image_original != ''">Change Cover Photo</div>
+				</label>
+					<input type="file" ng-file-select="onFileSelect($files)" value="Add Cover Photo" />
+				</div>
+				</div>
+			</div>
+			<h3>{{storeDetail.business_name}}</h3>
+				<ul class="store-invitations">
+					<li><a ng-if="storeDetail.owner_id == currentUser.id && storeDetail.parent_store_id==0" href="#/create/child/shope/{{storeDetail.id}}" title="Create Child Shope">Create Child Shop</a></li>
+					<li><a ng-if="storeDetail.owner_id == currentUser.id" href="javascript:void(0)" data-ng-click="editStore();initializeWait()" title="Edit Shop">Edit</a></li>
+					<li><a ng-if="storeDetail.owner_id == currentUser.id" href="#/album/shope/{{storeDetail.id}}">Photos</a></li>
+					<li class="last"><a href="javascript:void(0)" ng-click="showAllMembers()">Members </a> <div class="invitations-number">{{storeDetail.members.length}}</div>
+					<ul class="invitations-lists" ng-show="showAllStoreMember">
+						<span class="arrow-up"></span>
+						<li ng-repeat="member in storeDetail.members">{{member.username}}</li>
+					</ul> 
+					</li>
+				</ul>
+			</div>
+			<!--store profile section-->
+			<div ng-if="storeDetail.owner_id == currentUser.id">
+			<div class="store-album-section" ng-controller="StoreAlbumController">			
+			<div class="store-dp-album">Album <span class="ng-hide" ng-show="albloader"><img titile="" alt="" src="app/assets/images/ajax-loader.gif"></span></div>
+			<ul class="store-dp-album-option" ng-if="listPageAlbum.length">
+				<li data-ng-repeat="item in listPageAlbum | limitTo:3">
+				<a href="javascript:void(0)"><div ng-if="item.album_featured_image" ng-click="redirectUrl(item.id, item.album_name)" class="store-dp-album-option-div"><img src="{{item.album_featured_image}}" width="246" height="150" alt="" titile="" /><span class="albname">{{item.album_name}}</span></div><div ng-if="!item.album_featured_image" ng-click="redirectUrl(item.id, item.album_name)" class="store-dp-album-option-div"><img src="app/assets/images/album-empty.jpg" alt="" titile="" width="246" height="150" /><span class="albname">{{item.album_name}}</span></div></a>
+				</li>
+			</ul>
+			<ul class="store-dp-album-option ng-hide" ng-if="!listPageAlbum.length" ng-show="noAlbums">
+				<li>
+					There are no albums in the list, Please Create Album.
+				</li>
+			</ul>	
+			</div>
+			</div>
+			<!--store profile section-->
+
+			<!--store album section-->
+			<div data-ng-controller="StorePostController">
+			<!-- place for store post form -->
+			<store-post-form data-ng-show="storeDetail.is_allowed == '1' || storeDetail.owner_id == currentUser.id"></store-post-form>
+			<ul class="store-dp-album-option" data-ng-hide="storeDetail.is_allowed == '1' || storeDetail.owner_id == currentUser.id">
+				<li>Post/comments are not allowed on this shop by Owner</li>
+			</ul>
+			<!--store profile section-->
+			<!--store comment view section-->
+			<store-post-list></store-post-list>
+			<!--store comment view section-->
+			</div>
+			</div>
+			</div>
+			</div>
+			<!-- Edit store form start from here-->
+			<div class="col-lg-8 col-md-8" data-ng-show="showEditForm">
+			<div class="inner-container">
+			<div class="form-container">
+				<form method="POST" action="" data-ng-submit="updateStore()">
+				<div class="login-error" style="text-align: center; color: red;" data-ng-show="createGroupError">{{createStoreErrorMgs}}</div>
+					<ul>
+						<li>
+							<span>Business Name</span>
+							<input type="text" class="form-control bg-gray" ng-model="store.business_name" required/>
+						</li>
+						<li>
+							<span>Legal Status</span>
+							<input type="text" class="form-control bg-gray" ng-model="store.legal_status" required/>
+						</li>
+						<li>
+							<span>Business Type</span>
+							<input type="text" class="form-control bg-gray" ng-model="store.business_type" required/>
+						</li>
+						<li>
+							<span>Phone</span>
+							<input type="text" class="form-control bg-gray" ng-model="store.phone" required/>
+						</li>
+						<li>
+							<span>Email</span>
+							<input type="email" class="form-control bg-gray" ng-model="store.email" required/>
+						</li>
+						<li>
+							<span>Business Country</span>
+							<select data-ng-model="store.business_country" data-ng-options="key as value for (key,value) in countryList">
+                                <option value="{{key}}">{{value}}</option>
+                            </select>
+						</li>
+						<li>
+							<span>Business Region</span>
+							<input type="text" class="form-control bg-gray" ng-model="store.business_region" required/>
+						</li>
+						<li>
+							<span>Business City</span>
+							<input type="text" class="form-control bg-gray" ng-model="store.business_city" required/>
+						</li>
+						<li>
+							<span>Business Address</span>
+							<input type="text" class="form-control bg-gray" ng-model="store.business_address" required/>
+						</li>
+						<li>
+							<span>Zip</span>
+							<input type="text" class="form-control bg-gray" ng-model="store.zip" required/>
+						</li>
+						<li>
+							<span>Province</span>
+							<input type="text" class="form-control bg-gray" ng-model="store.province" required/>
+						</li>
+						<li>
+							<span>Vat Number</span>
+							<input type="text" class="form-control bg-gray" ng-model="store.vat_number" required/>
+						</li>
+						<li>
+							<span>Iban</span>
+							<input type="text" class="form-control bg-gray" ng-model="store.iban" required/>
+						</li>
+						<li>
+							<span>Description</span>
+							<textarea class="form-control bg-gray" ng-model="store.description" required></textarea>
+						</li>
+						<li>
+							<span>Allow post/comments</span>
+							<input type="checkbox" class="form-control bg-gray" ng-model="store.is_allowed" ng-true-value="1" ng-false-value="0" ng-checked="1"/>
+						</li>
+						<li>
+							<span>Map location</span>
+							<input type="text" id="mapplace" class="form-control bg-gray" ng-model="store.map_place" required readonly/>
+							<input type="hidden" class="form-control bg-gray" ng-model="store.parent_store_id" required/>
+						</li>
+						<li>
+							<span>Latitutde</span>
+							<input type="text" class="form-control bg-gray" id="latitude" ng-model="store.latitude" value="" required readonly/>
+						</li>
+						<li>
+							<span>Longitude</span>
+							<input type="text" class="form-control bg-gray" id="longitude" ng-model="store.longitude" value="" required readonly/>
+						</li>
+						<li>
+						<div style="width: 68.66%; margin-left: 235px;">
+		            		<!-- <map></map> -->
+		            		<autocomplete-map></autocomplete-map>
+	            		</div>
+		        		</li>
+						<div data-ng-show="createStoreLoader" style="text-align: center;">
+	                        <img src="app/assets/images/ajax-loader.gif" alt="loading..." />
+		                </div>
+		                	<div ng-show="updateStart" class="loader-container">
+								<img src="app/assets/images/ajax-loader.gif" alt="loading..." />
+							</div>
+							<button data-ng-hide="updateStart" type="submit" class="btn btn-primary">Update Shop <i class="fa fa-fw fa-plus"></i>
+							</button>
+							<button data-ng-hide="updateStart" class="btn btn-primary" ng-click="cancelEdit()">Cancel <i class="fa fa-fw fa-times"></i></button>
+						</li>
+					</ul>
+				</form>
+		      </div>
+		      </div>
+			</div>
+			<div class="col-lg-4 col-md-4">
+			<!-- Edit store form start from here-->
+			<store-Notification-Panel></store-Notification-Panel>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="clearfix"></div>
+</div>

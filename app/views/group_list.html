@@ -1,0 +1,38 @@
+<div class="group-list-cont" scroller="" loading-method="loadMore()">
+    <div class="group-list" data-ng-repeat = "group in userGroupList">
+        <div class="list-image">
+            <ul>
+                <li>
+                    <a data-ng-if="group.profile_img_thumb != '' " href="#/club/view/{{group.group_id}}/{{group.group_status}}" style="background-image:url('{{group.profile_img_thumb}}');"> </a>
+
+                    <a data-ng-if="group.profile_img_thumb == '' " href="#/club/view/{{group.group_id}}/{{group.group_status}}" style="background-image:url('app/assets/images/club-list-list-thumb.png');"></a>
+
+                        <!-- <img src="{{group.profile_img_thumb}}" data-ng-if="group.profile_img_thumb != '' " alt="{{group.group_title}}">
+                    <img src="app/assets/images/default_group.png" data-ng-if="group.profile_img_thumb == '' " alt="No image available"> -->
+
+                </li>
+            </ul>
+        </div>
+        <div class="list-text">
+            <div class="list-text-head">{{group.group_title}}</div>
+            <ul>
+                <li><i class="fa fa-info-circle"></i><p>{{group.group_description}}</p></li>
+                <li><i class="fa fa-user"></i><span>{{group.members.length}} members</span></li>
+                <li data-ng-if="group.is_member == 1"><i class="fa fa-user"></i><span>{{currentUser.username}}</span> is a member</li>
+            </ul>
+            <a href="#/club/view/{{group.group_id}}/{{group.group_status}}" class="btn btn-primary">See More</a>
+            <span data-ng-if="group.is_sent == 0"><a id="groupjoing{{group.group_id}}" href data-ng-click="joinPublicGroups(group.group_id)" class="btn btn-primary joinbtn" data-ng-if="group.is_member == 0">Join Club</a>
+            </span>
+            <img id="joinloader{{group.group_id}}" class="request-pen" style="display:none;" src="app/assets/images/ajax-loader.gif" alt="loading..." />
+            <span id="requestsent{{group.group_id}}" class="request-pen" style="display:none;">Request sent</span>
+            <span id="requestpending{{group.group_id}}" class="request-pen" style="display:none;">Request is pending for owner approval</span>
+            <span class="request-pen" data-ng-if="group.is_sent">Request is pending for owner approval</span>
+            <a href="javascript:void(0);" class="btn btn-primary" data-ng-if="group.owner_id == currentUser.id" data-ng-click='confirmClick() && deleteGroup($index)' confirm-click>Delete</a>
+        </div>
+    </div>
+</div>
+<style>
+.animation { opacity:0; transition:all 2000ms ease-in-out; }
+
+.animation.fade-in { opacity:1; }
+</style>

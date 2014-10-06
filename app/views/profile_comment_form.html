@@ -1,0 +1,32 @@
+<div class="input-group comment comments-listing">
+	<span class="errorMsg" data-ng-show="commentErrMsg">{{commentErrMsg}}</span>
+	<a href="javascript:void(0)" class="pull-left">
+		<img data-ng-show="currentUser.basicProfile.profile_img.thumb" src="{{currentUser.basicProfile.profile_img.thumb}}" width="38" height="38" class="media-object">
+		<img data-ng-hide="currentUser.basicProfile.profile_img.thumb" src="app/assets/images/dummy60X60.jpg" width="38" height="38" class="media-object">
+	</a>
+		<div class="comment-input store-commnet-typearea">
+			<form>
+			<div class="add-photo-comment" data-ng-show="showImgSelect">
+				<label for="file"><i class="fa fa-picture-o"></i></label>
+				<input type="file" ng-multi-file-select="onFileSelect($files)" class="search-botton" multiple />
+			</div>
+			<input type="text" class="form-control" submit-enter="addComment()" data-ng-model="commentText" placeholder="Your comment here..." ng-disabled="commentInProcess[postIndx]">
+			<div class="input-group-btn">
+				<button type="button" class="btn btn-primary" href="javascript:void(0);" data-ng-click="addComment()" ng-disabled="commentInProcess[postIndx]"><i class="fa fa-comment"></i></button>
+			</div>
+			</form>
+			<div class="preview-images" ng-show="showPreview">
+				<div ng-repeat="img in imgSrc track by $index" class="comment-pre">
+					<a class="fancybox" style="background-image:url('{{img.media_thumb_link}}');">
+					</a> 
+					<i data-ng-click="removeImage($index)" class="fa fa-fw fa-times" title="Remove"></i>
+					 <div>
+		                <show-progress></show-progress>
+		            </div> 
+				</div>
+			</div>
+		</div>
+</div>	
+<div ng-show="createCommentInProcess" style="margin-left:30px;">
+	<show-progress></show-progress>
+</div>

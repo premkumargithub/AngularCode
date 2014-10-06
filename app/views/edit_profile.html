@@ -1,0 +1,201 @@
+<div class="col-3-layout">
+<left-Panel></left-Panel>
+<div id="content">
+<div class="innerAll">
+<div class="row">
+<div class="col-lg-8 col-md-8">
+    <div class="inner-container">
+        <div class="editProfileLoader"> 
+        <img src="app/assets/images/load-more.gif" data-ng-show="loadEditProfile" />
+    </div>
+<div class="tab-content" data-ng-hide="loadEditProfile">
+    <div class="profile-tab-container">
+    <!-- Tabs Heading -->
+    <div class="tabsbar tabsbar-2">
+    <ul class="row row-merge">
+    <li class="col-md-3 glyphicons circle_info"><a href data-ng-click="showTab('edit');" >Edit Profile</a></li>
+    <li class="col-md-3 glyphicons cart_in"><a href data-ng-click="showTab('brokerprofile');" data-ng-if="currentUser.basicProfile.broker_profile == 1">Edit Broker Profile</a></li>
+    </ul>
+    </div>
+
+    <!-- Tab content -->
+    <div class="tab-pane1"  data-ng-show="edit">
+    <div class="timeline-cover">
+    <div class="widget">
+    <div class="widget-body padding-none margin-none">
+    <div class="innerAll"> <i class="fa fa-quote-left text-muted pull-left fa-fw"></i>
+    <p class="lead margin-none">Edit Profile</p>{{editMessage}}
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="form-container">
+    <form name="editUser" data-ng-submit="editProfile(1)">
+    <ul>
+    <li>
+    <span>First Name</span>
+    <input type="text" data-ng-model="editUser.firstName"class="form-control bg-gray" required/>
+    </li>
+    <li>
+    <span>Last Name</span>
+    <input type="text" class="form-control bg-gray" data-ng-model="editUser.lastName" required/>
+    </li>
+    <li>
+    <span>Birthday</span>
+    <div class="register-sixth-one-half">
+    <div class="register-sixth-select-month">
+    <select data-ng-model="editUser.month" data-ng-options="month.name for month in months" ng-change="monthChange();" required>
+    <option value="">Month</option>
+    </select>
+    </div>
+    <div class="register-sixth-select-month register-sixth-day">
+    <select data-ng-model="editUser.day" data-ng-options="day for day in days" required>
+    <option value="">Day</option>
+    </select>
+    </div>
+    <div class="register-sixth-select-month register-sixth-year">
+    <select data-ng-model="editUser.year" data-ng-options="year for year in years" required>
+    <option value="">Year</option>
+    </select>
+    </div>
+    </div>
+
+    </li>
+    <li>
+    <span>Gender</span>
+    <div class="register-sixth-two-half">   
+    <div class="register-sixth-one-radio">
+    <div class="shipping_input_radio">
+    <input type="radio" name="gender" value="m" id="register_male" class="register-sixth-radio" data-ng-model="editUser.gender" required >
+    <label for="register_male"><span>male</span></label>
+    </div>
+    <label for="register_male">Male<label>
+    </label></label></div>
+
+    <div class="register-sixth-two-radio">
+    <div class="shipping_input_radio">
+    <input type="radio" name="gender" value="f" id="register_female" class="register-sixth-radio" data-ng-model="editUser.gender" required>
+    <label for="register_female"><span>male</span></label>
+    </div>
+    <label for="register_female">Female</label>
+    </div>
+
+    </div>
+    </li>
+    <li>
+    <span>Region</span>
+    <select class="form-control bg-gray"  data-ng-model="editUser.country" data-ng-options="country.country for country in countries" required>
+    <option value="">Country</option>
+    </select>
+    </li>
+    <li>
+    <span>Zip</span>
+    <input type="number" class="form-control bg-gray" data-ng-model="editUser.zip" required/>
+    </li>
+    <li>
+    <span>City</span>
+    <input type="text" class="form-control bg-gray" data-ng-model="editUser.city" required/>
+    </li>
+    <li>
+    <span>Address</span>
+    <textarea class="form-control bg-gray" data-ng-model="editUser.address" required></textarea>
+    </li>
+    <li>
+    <span>Place</span>
+    <input type="text" id="mapplace" class="form-control bg-gray" data-ng-model="editUser.place" /required>
+    </li>
+    <li>
+    <span>Latitutde</span>
+    <input type="text" id="lat" value=""class="form-control bg-gray" data-ng-model="editUser.latitude" readonly />
+    </li>
+    <li>
+    <span>Longitude</span>
+    <input type="text" id="lon" value=""  class="form-control bg-gray" data-ng-model="editUser.longitude" readonly/>
+    </li>
+
+    <li><!-- <map><map> -->
+    <autocomplete-map></autocomplete-map></li>
+    <li><img src="app/assets/images/ajax-loader.gif" class="ng-hide" data-ng-show="showloading">
+    <button type="submit" class="btn btn-primary" >Save</button>
+
+    </li>
+    </ul>
+    </form>
+    </div>
+    </div>
+    <!-- // Tab content END -->
+
+    <!-- Tab content -->
+    <div class="tab-pane1"  data-ng-show="brokerprofile">
+    <div class="timeline-cover">
+    <div class="widget">
+    <div class="widget-body padding-none margin-none">
+    <div class="innerAll"> <i class="fa fa-quote-left text-muted pull-left fa-fw"></i>
+    <p class="lead margin-none">Edit Broker Profile</p> {{editMessage}}
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="form-container">
+    <form name="editUser" data-ng-submit="editProfile(2)">
+    <ul>
+    <li>
+    <span>Phone</span>
+    <input type="number" class="form-control bg-gray " data-ng-model="editUser.phone" required/>
+    </li>
+    <li>
+    <span>Vat Number</span>
+    <input type="text" class="form-control bg-gray" data-ng-model="editUser.vatnumber" required/>
+    </li>
+    <li>
+    <span>Fiscal Code</span>
+    <input type="text" class="form-control bg-gray" data-ng-model="editUser.fiscalcode" required/>
+    </li>
+    <li>
+    <span>Iban</span>
+    <input type="text" class="form-control bg-gray" data-ng-model="editUser.iban" required/>
+    </li>
+    <li>
+    <span>Place</span>
+    <input type="text" id="mapplace1" class="form-control bg-gray" data-ng-model="editUser.place" />
+    </li>
+    <li>
+    <span>Latitutde</span>
+    <input type="text" id="lat1" value=""class="form-control bg-gray" data-ng-model="editUser.latitude" readonly/>
+    </li>
+    <li>
+    <span>Longitude</span>
+    <input type="text" id="lon1" value=""  class="form-control bg-gray" data-ng-model="editUser.longitude" readonly/>
+    </li>
+    <li><!-- <map></map> -->
+    <input id="pac-input" class="controls" type="text"
+    placeholder="Enter a location">
+    <div id="type-selector" class="controls">
+    <input type="radio" name="type" id="changetype-all" checked="checked">
+    <!-- <label for="changetype-all">All</label>
+    -->
+    <!-- <input type="radio" name="type" id="changetype-establishment">
+    <label for="changetype-establishment">Establishments</label>
+
+    <input type="radio" name="type" id="changetype-geocode">
+    <label for="changetype-geocode">Geocodes</label> -->
+    </div>
+    <div id="map-canvas-second" style="width:100%;height:300px;"></div></li>
+    <li><img src="app/assets/images/ajax-loader.gif" class="ng-hide" data-ng-show="showloading">
+    <button class="btn btn-primary" >Save</button>
+
+    </li>
+    </ul>
+    </form>
+    </div>
+    </div>
+    </div>
+</div>
+</div></div>
+<div class="col-md-4 col-lg-4">
+    <profile-Right-Panel></profile-Right-Panel>
+</div>
+</div>
+</div>
+</div>
+</div>

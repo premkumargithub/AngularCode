@@ -1,0 +1,80 @@
+<div class="col-2-layout">
+<div id="content" class="container-right-fluid-page">
+<div class="innerAll">
+	<div class="row">
+		<div class="col-lg-8 col-md-8">
+		<div class="inner-container">
+			<div class="album-section-left">
+				<div class="album-section-container-top imgupload">
+					<div class="heading">Club Album : {{albumName}}</div>
+					<div ng-show="uploadSuccess" class="msgDisp" style="color:green">{{uploadSuccessMsg}}</div>
+					<div ng-show="uploadError" class="msgDisp" style="color:red">{{uploadErrorMsg}}</div>
+					<div class="uploadcontainer">
+						<div class="album-online">
+							<span class="album-status"><img titile="" alt="" src="app/assets/images/album.png"></span> Image Upload 
+						</div>
+						<form ng-submit="UploadMediaInAlbum()">
+						<div class="login-error" style="text-align: center; color: red;" data-ng-show="fileNotValid">{{fileNotValidMsg}}
+						</div>
+						<ul class="album-action-message">
+							<li class="last"><a href="javascript:void(0)">
+            					<input type="file" ng-multi-file-select="onFileSelect($files)" multiple accept="image/*"/>
+            					</a>
+							</li>
+							<li class="last"><a href="javascript:void(0)">
+								<span class="ng-hide" ng-show="imageUploadStart"><img titile="" alt="" src="app/assets/images/ajax-loader.gif"></span>
+								<button ng-hide="imageUploadStart" type="submit" id="addbutton" class="btn btn-primary">Add Photos <i class="fa fa-fw fa-plus"></i></button>
+								<span class="ng-hide" ng-show="uploadloader"><img titile="" alt="" src="app/assets/images/ajax-loader.gif"></span>
+								</a>
+							</li>
+						</ul>
+						</form>
+						<ul>
+							<li><a class="btn btn-primary" href="#/album/club/{{groupId}}/{{clubType}}">Back to Club Album</a></li>
+						</ul>
+					</div>
+					<div class="preview-images">
+					<div ng-show="imageSrc" ng-repeat="img in imageSrc" class="preview-image-list">
+					<img ng-src="{{img}}" width="100" height="100" style="padding:10px;" />
+					<i data-ng-click="removeImage($index)" class="fa fa-fw fa-times" title="Remove"></i>
+					</div>
+					</div>
+				</div>
+				<div data-ng-show="clubAlbumLoading" class="loader-container">
+					<img src="app/assets/images/ajax-loader.gif" alt="loading..." />
+				</div>
+				<div class="album-option-container" data-ng-hide="clubAlbumLoading">
+				<div data-ng-show="deleteMediaStart" class="loader-container">
+					<img src="app/assets/images/ajax-loader.gif" alt="loading..." />
+				</div>
+					<ul class="album-option" ng-if="viewalbum.length">
+						<li data-ng-repeat="item in viewalbum">
+							<a class="view-album-img fancybox" href="{{item.media_path}}" rel="maingallery" style="background-image:url('{{item.thumb_path}}');"><!--<img src="{{item.media_path}}" width="158px" height="128px"/>--></a>
+							<span class="album-delete-image-internal" ><a class="close-btn"><i class="fa fa-fw fa-gear"></i></a>
+									<div class="album-gear-pop">
+										<a href="javascript:void(0);" ng-click="confirmClick() && deleteClubAlbumMedia(item.id, $index)" confirm-click>Delete This Photo</a>	
+										<a id="featuredloaderlink-{{$index}}" class="profileimg" ng-click="setClubProfileImage(item.id, $index)" title="Set as profile Image">Set as Club Profile</a>
+										<span class="sideloader" style="display:none;" id="featuredloader-{{$index}}"><img titile="" alt="" src="app/assets/images/ajax-loader.gif"></span>		
+									</div>
+									</span>
+						</li>
+					</ul>
+					<div class="album-option" ng-if="!viewalbum.length">
+						
+							There is no photo uploaded in this album.
+						
+					</div>	
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class="col-lg-4 col-md-4">
+			<profile-right-panel></profile-right-panel>
+		</div>
+	</div>
+</div>
+</div>
+<div class="clearfix"></div>
+</div>
+
+

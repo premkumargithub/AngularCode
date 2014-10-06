@@ -1,0 +1,94 @@
+<div id="content" class="container-right-fluid-page">
+    <!-- <div class="layout-app">  -->
+    <div class="innerAll">
+      <div class="row">
+        <div class="col-lg-9 col-md-9">
+
+        	<!--This directive will set the time line  image on alubum pic-->
+			<user-Cover-Profile-Panel></user-Cover-Profile-Panel>
+        
+        <!-- <user-Cover-Profile-Panel></user-Cover-Profile-Panel> -->
+		<div ng-show="friendViewLoader" class="loader-container">
+			<img src="app/assets/images/ajax-loader.gif" alt="loading..." />
+		</div>	
+		<!--store details section-->
+		<div class="store-details-section" data-ng-hide="friendViewLoader">
+			<!--store profile section-->
+			<div class="store-dp-section friends-view-container">
+				
+			</div>
+			<!--store profile section-->
+			
+			<div class="friend-profile-container">		
+			
+			<div class="timeline-cover">
+            <div class="widget">
+              <div class="widget-body padding-none margin-none">
+                <div class="innerAll"> <i class="fa fa-quote-left text-muted pull-left fa-fw"></i>
+                  <p class="lead margin-none">Profile</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-container">
+				<ul>
+					<li>
+						<span>First Name:</span>
+						<span class="friend-detail">{{currentUser.basicProfile.firstname}}</span>
+					</li>
+					<li>
+						<span>Last Name:</span>
+						<span class="friend-detail">{{currentUser.basicProfile.lastname}}</span>
+					</li>
+					<li>
+						<span>Birthday:</span>
+						<span class="friend-detail">{{currentUser.basicProfile.date_of_birth.date | date:'MM/dd/yyyy'}}</span>
+					</li>
+					<li>
+						<span>Gender:</span>
+						<span class="friend-detail" ng-if="currentUser.basicProfile.gender == 'm'">Male</span>
+						<span class="friend-detail" ng-if="currentUser.basicProfile.gender == 'f'">Female</span>
+					</li>
+					<li>
+						<span>Region:</span>
+						
+					</li>
+					<li>
+						<span>Zip:</span>
+						
+					</li>
+					<li>
+						<span>City:</span>
+					
+					</li>
+					<li>
+						<span>Address:</span>
+					
+					</li>
+					<li>
+						<span>Latitutde:</span>
+					
+					</li>
+					<li>
+						<span>Longitude:</span>
+					
+					</li>
+				</ul>
+          </div>
+			
+			
+		</div>			
+		</div>
+		<!--store details section-->
+
+        </div>
+		
+		<div class="col-lg-3 col-md-3">
+			<profile-Right-Panel></profile-Right-Panel>
+        </div>	
+      </div>
+    </div>
+  </div>
+  <!-- // Content END -->
+  
+  <div class="clearfix"></div>

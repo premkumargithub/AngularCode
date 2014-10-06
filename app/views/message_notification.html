@@ -1,0 +1,50 @@
+<a href class="dropdown" data-ng-click="showAllMessage()">
+<i class="fa fa-envelope" data-ng-show="!messageNoti.length"></i>
+<i class="fa fa-envelope noti" data-ng-show="messageNoti.length"></i>
+<div class="total-notification" data-ng-show="messageNoti.length">{{messageNoti.length}}</div>
+</a>
+
+<div data-ng-show="showNewMessageList">
+<ul data-ng-show="loadingUnreadMssage" class="add-request-accept">
+	<li class="accept-center">
+		<img src="app/assets/images/proceed.gif">
+	</li>
+</ul>
+<div data-ng-show="newMessageShow">
+<ul class="add-request-accept" ng-if="messageNoti.length">
+	<li class="media" data-ng-repeat="message in messageNoti | orderBy:'created_at':true">
+		<div data-ng-if="message.message_type == 'R'" data-ng-click="storeThreadAndFriendId(message.thread_id,message.sender_user.id); closeDrop();readMessage(message.thread_id);">
+			<a href="#/message">
+				<div class="add-friend-img">
+				<img data-ng-if="message.sender_user.profile_image_thumb != ''" class="media-object thumb pull-left" src="{{message.sender_user.profile_image_thumb}}" alt="no image" width="50"/>
+				<img data-ng-if="message.sender_user.profile_image_thumb == ''"class="media-object pull-left" width="50" src="app/assets/images/dummy32X32.jpg" alt="no image" width="50"/>
+				</div>
+				<div class="media-body add-friend-right">
+					<span class="label label-default pull-right">{{message.created_at | date:'MMM d'}}</span>
+					<h5 class="media-heading">{{message.sender_user.first_name}} {{message.sender_user.last_name}}</h5>
+					<p class="margin-none">{{message.body.substring(0,10)}}</p>
+				</div>
+			</a>
+		</div>
+		<div data-ng-if="message.message_type == 'N'" data-ng-click="storeThreadAndFriendId(message.id,message.sender_user.id); closeDrop();readMessage(message.thread_id);">
+			<a href="#/message">
+				<div class="add-friend-img">
+				<img data-ng-if="message.sender_user.profile_image_thumb != ''" class="media-object thumb pull-left" src="{{message.sender_user.profile_image_thumb}}" alt="no image" width="50"/>
+				<img data-ng-if="message.sender_user.profile_image_thumb == ''"class="media-object pull-left" width="50" src="app/assets/images/dummy32X32.jpg" alt="no image" width="50"/>
+				</div>
+				<div class="media-body add-friend-right">
+					<span class="label label-default pull-right">{{message.created_at | date:'MMM d'}}</span>
+					<h5 class="media-heading">{{message.sender_user.first_name}} {{message.sender_user.last_name}}</h5>
+					<p class="margin-none">{{message.body.substring(0,10)}}</p>
+				</div>
+			</a>
+		</div>
+	</li>
+</ul>
+<ul class="add-request-accept" ng-if="messageNoti.length == '0'" >
+	<li class="media">
+		There's no new message
+	</li>
+</ul>
+</div>
+</div>

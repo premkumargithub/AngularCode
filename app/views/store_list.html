@@ -1,0 +1,23 @@
+	<div class="group-list-cont">
+	<div class="group-list storecoverid{{store.id}}" data-ng-repeat="store in storeListObject" >
+		<div class="list-image">
+			<a href="#/shope/view/{{store.id}}" data-ng-if="store.profile_image_thumb != '' " style="background-image:url('{{store.profile_image_thumb}}');">
+			<!-- <img src="{{store.profile_image_thumb}}"  alt="{{store.businessName}}" title="{{store.businessName}}"/> -->
+			</a>
+			<a href="#/shope/view/{{store.id}}" data-ng-if="store.profile_image_thumb == '' " style="background-image:url('app/assets/images/store-prod.jpg');">
+            <!-- <img src="app/assets/images/store-prod.jpg" alt="No image available" /> -->
+            </a>
+		</div>
+		<div class="list-text">
+			<div class="list-text-head"><a href="#/shope/view/{{store.id}}" >{{store.businessName}} </a>
+			</div>
+			<ul>
+				<li><i class="fa fa-info-circle"></i><p>{{ store.description | limitTo: 100 }}</p></li>
+				<li><i class="fa fa-user"></i><span>{{store.user_info.username}}</span></li>
+			</ul>
+			<a href="#/shope/view/{{store.id}}" class="btn btn-primary" title="View Shope" >View Shope</a>
+			<a id="store{{store.id}}" ng-if="store.user_info.id == currentUser.id" href="javascript:void(0)" class="btn btn-primary" title="Delete Shope" ng-click="confirmClick() && deleteStore(store.id, store.parentStoreId)" confirm-click>Delete</a>
+			<span id="storedelete{{store.id}}" style="display:none"><img src="app/assets/images/ajax-loader.gif" alt="loading..." /></span>
+		</div>
+	</div>
+</div>

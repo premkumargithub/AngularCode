@@ -1,0 +1,243 @@
+<div class="col-3-layout">
+<!-- Main Sidebar Menu -->
+<div id="menu" class="hidden-print sidebar-default sidebar-brand-primary message-container">
+	<div id="sidebar-social-wrapper">
+		<!--message section-->
+		<div class="message-fluid-left">
+			<!--message fluid inbox other and more option-->
+			<div class="message-box-ancor">
+				<div class="message-box-index-first"><a href data-ng-click="messageInbox('');">Inbox</a></div>
+			   
+			    
+			</div>
+			<!--message fluid inbox other and more option-->
+			<div class="scrollablecontent" class="ng-isolate-scope" id="messageScroll" loading-method="loadMore(listmessage[0].thread_id)" scroller="" >
+				<!--search input -->
+				<div class="scrollablecontent-search"><input type="text" value="Search" placeholder="Search" ng-model="nameSearch" ng-change="searchUserThread();" />
+					
+				</div>
+				<!--search input -->
+				<div class="message-left-loader">
+				<img src="app/assets/images/proceed.gif" data-ng-show="loadUserMessage" />
+				</div>
+				<perfect-scrollbar class="panel-scroller message-scroller-user" wheel-propagation="true" wheel-speed="20">
+				<!-- <div infinite-scrol="loadMoreList()" class="scroll-loader" can-load="canLoad" threshold="100" > -->
+				<div class="scroll-loader" infinite-scroll-distance="3" >
+					<ul class="scrollable-block">
+						<!--scrollable li section-->
+						<li data-ng-repeat="item in response | orderBy:'last_message.created_at':true" id="list-{{item.thread_id}}"> 
+							<div class="scrollabe-block-section-panel" ng-click="listusermessages(item.user_detail.id, item.thread_id);readMessage(item.last_message.thread_id);messageInbox(1)" >
+								
+								<div class="scrollable-pic" >
+								<img data-ng-if="item.user_detail.profile_image_thumb != '' " src="{{item.user_detail.profile_image_thumb}}" width="50" height="50" alt="" title="">
+								<img data-ng-if="item.user_detail.profile_image_thumb == '' " src="app/assets/images/profile.jpg" width="50" height="50" alt="noImage" titile="">
+								</div>
+							
+								<div class="scrollable-name" >
+
+									<h3 ><b>{{item.user_detail.first_name}} {{item.user_detail.last_name}}</b></h3>
+									
+									<div class="scrollable-week">{{item.last_message.created_at | date:'MMM d'}}</div>
+									<h4><span data-ng-if="item.last_message.sender_user.id == userid" class="message-replay"><img src="app/assets/images/message-reply.png" alt="" title=""></span>{{ item.last_message.body.substring(0,7) }}</h4>
+									<div data-ng-if="item.last_message.sender_user.id != userid">
+									<div class="scrollable-unread" data-ng-if="item.last_message.is_read == 0" >unread</div>
+								</div>
+							</div>
+						</div>
+						</li>
+						<!--scrollable li section-->	
+					</ul>
+				</div>
+				</perfect-scrollbar>
+			</div>
+		</div>
+		<!--message section-->
+	</div>
+</div>
+<!-- // Main Sidebar Menu END -->
+
+<!-- Content START -->
+<div id="content">
+	<!-- <div class="layout-app">  -->
+	<div class="innerAll">
+		<div class="row">
+			<div class="col-lg-8 col-md-8">
+				<div class="inner-container">
+					<!--middler section-->
+					<div class="scrollareawrap">
+					<!--online status sectio-->
+						<div class="scrollareawrap-container">
+							<div class="scrollareawrap-online" data-ng-hide="custom">
+								<b data-ng-if="listmessage[0].sender_user.id == userid">{{listmessage[0].receiver_user.first_name}} {{listmessage[0].receiver_user.last_name}}</b>
+								<b data-ng-if="listmessage[0].sender_user.id != userid">{{listmessage[0].sender_user.first_name}} {{listmessage[0].sender_user.last_name}}</b>
+								
+							</div>
+							<ul class="scrollareawrap-action-message">
+
+								<li data-ng-hide="custom" class="last"><a href data-ng-click="newMessageShow()">New Message</a></li>
+								<li data-ng-show="custom" class="last"><a href data-ng-click="MessageHide()">List Message</a></li>
+
+							</ul>
+						</div>
+						<!--online status sectio-->
+						<div class="message-big-loader"><img src="app/assets/images/proceed.gif" data-ng-show="loadMessage" /></div>
+						<div data-ng-hide="custom">
+							<!-- <div class="load-more-onscroll ng-isolate-scope" loading-method="loadMore(listmessage[0].thread_id)" scroller="" > -->
+							 <div class="load-more-onscroll messages-onscroll" infinite-scrolls="loadMore(listmessage[0].thread_id)"  can-load="canLoad" threshold="100">
+								
+								<ul class="scrollareawrap-message-section">
+									<!--message section reply-->
+									<div class="scrollareawrap-online load-more" data-ng-show="loadMoreMessage"><img src="app/assets/images/ajax-loader.gif"  />
+										Load More...
+							</div>
+									<li data-ng-repeat="item in listmessage | orderBy:'created_at':false" >
+										<div  class="scrollareawrap-message-pic"><a herf="javascript:void(0)"><img data-ng-if="item.sender_user.profile_image_thumb != '' " src="{{item.sender_user.profile_image_thumb}}" width="50" height="50" alt="noImage" titile="">
+										<img data-ng-if="item.sender_user.profile_image_thumb == '' " src="app/assets/images/profile.jpg" width="50" height="50" alt="noImage" titile="">
+										</a></div>
+
+										<div class="scrollareawrap-message-right">
+											<div class="scrollareawrap-message-left-one" >
+												<h3><b><a href="#/viewfriend/{{item.sender_user.id}}">{{item.sender_user.first_name}} {{item.sender_user.last_name}}</a></b></h3>
+									
+												<div class="scroolareawrap-message-btn-with-time">
+													<a class="edit-btn-message" href data-ng-click="edit= !edit;assignUpdate(item.body);"><i class="fa fa-fw fa-edit"></i></a>
+													<a class="delete-btn-message" href data-ng-click="deleteMessage(item.id,item.thread_id)"><i class="fa fa-fw fa-times"></i></a>
+													<h4>{{item.created_at | date:'MM/dd/yyyy  h:mma'}}</h4>
+												</div>
+											</div>
+											<div class="scrollareawrap-message-left-two" data-ng-show="edit">{{item.body}} </div>
+											<div class="scrollareawrap-message-left-two" data-ng-hide="edit">
+												<input type="text" ng-model="model.updateBody" />
+												<input type="button" value="update" data-ng-click="updateMessage(item.id,item.thread_id)"/>
+											</div>
+											<div data-ng-if="item.media_thumb_path != '' " class="scroolarawrap-message-left-mess-img"><!-- <img src="{{item.media_thumb_path}}" data-ng-if="item.media_thumb_path != '' " alt="{{group.group_title}}"> -->
+											<a  href="{{item.media_thumb_path}}" class="fancybox" style="background-image:url('{{item.media_thumb_path}}');"></a>
+											</div>
+
+										</div>
+										<!--<div class="scrollareawrap-previous-message-date">
+										<div class="scrollareawrap-previous-message-date-panel">July 27</div>
+										</div>-->
+									</li>
+										
+									<!--message section reply-->					
+								</ul>					
+							</div>
+							<!--write-text a panel-->
+							<div class="message-write-a-reply-section">
+								<!--write-text a panel white-->
+								<div class="message-write-a-panel">
+									<!--write message reply textarea-->
+									<div class="write-a-message-reply">
+										<textarea name="Write a reply..." value="Write a reply..." data-ng-model="body" placeholder="Write a reply..."></textarea>
+									</div>
+									<!--write message reply textarea-->
+									<div class="write-attach-panel">
+										<div class="attach-panel-section-left">
+											<!--add photo file -->
+											<div class="photo-panel-file">
+												<a href="javascript:void(0);">
+													<img src="app/assets/images/add-photo.png" alt="" titile="" />
+													<span class="photo-span-file">Add Photo</span>
+												</a>
+												<div class="photo-panel-add-file">
+													<input type="file" ng-file-select="onFileSelect($files)" required/> 
+													<!-- <input type="file" file-model="myFile" id="replyImage"  required/> -->
+													</div>
+											</div>
+											<!--add photo file -->
+										</div>
+										<div class="write-reply-press-panel">
+											<div class="write-replay-press-button" data-ng-show="emptyMessageError"><font  color="red" >Enter the message first</font></div>
+											<div class="write-replay-press-button"><img src="app/assets/images/ajax-loader.gif" data-ng-show="replyMessageShow" />
+												<button ng-hide="replyMessageShow" type="button" class="btn btn-primary" href="javascript:void(0);" data-ng-click="replyMessage(listmessage[0].thread_id)"><i class="fa fa-comment"></i></button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--write-text a panel white-->
+								<div ng-show="imageSrc" class="preview-image-list">
+									<img ng-show="imageSrc" ng-src="{{imageSrc}}" width="60" height="60"/>
+									<i data-ng-show="deleteImage" data-ng-click="removeImage()" class="fa fa-fw fa-times" title="Remove"></i>
+								</div>
+							</div>
+							<!--write-text a panel-->
+						</div>		
+
+
+						<div data-ng-show="custom">
+							<div id="recipient" class="message-write-search-section">
+								<div class="message-write-overlay">
+									<div class="message-write-to-panel">
+										<div class="message-write-to">To:</div><input type="text" data-ng-model="recipientAddress" data-ng-change="listFriend()" data-ng-blur="clearList()">
+									</div>
+
+									<ul class=" header-top-search-field">
+										<li data-ng-repeat="name in names">
+											<label  data-ng-click="selectFriend(name.user_info.first_name,name.user_info.last_name,name.user_id)" data-ng-model="selected">
+												<!-- <img src="{{name.user_info.profile_image_thumb}}">
+												{{name.user_info.first_name}} {{name.user_info.last_name}}
+												{{name.user_info.user_email}} -->
+
+												<div class="search-field-img">
+								                <img data-ng-if="name.user_info.profile_image == ''" src="app/assets/images/dummy32X32.jpg" alt="Profile" class="img-circle">
+								                <img data-ng-if="name.user_info.profile_image != ''" src="{{name.user_info.profile_image_thumb}}" width="40" height="40"></div>
+								                <div class="search-filed-text-section">
+								                <div class="search-field-name">{{name.user_info.first_name}} {{name.user_info.last_name}}
+                    </div> 
+                    <div class="search-field-email">{{name.user_email}}</div>
+                    </div>
+											</label>
+										</li>
+									</ul>
+								</div>
+								<div class="message-write-a-reply-section">
+								<!--write-text a panel white-->
+									<div class="message-write-a-panel">
+										<!--write message reply textarea-->
+										<div class="write-a-message-reply">
+											<textarea name="Write a reply..." data-ng-model="body" value="Write a message..." placeholder="Write a Message..."></textarea>
+											
+										</div>
+										<!--write message reply textarea-->
+										<div class="write-attach-panel">
+											<div class="attach-panel-section-left">
+												<img ng-show="imageSrc" ng-src="{{imageSrc}}" width="60" height="60"/>
+												<i data-ng-show="deleteImage" data-ng-click="removeImage()" class="fa fa-fw fa-times" title="Remove"></i>
+												<!--add photo file -->
+												<div class="photo-panel-file">
+													<a href	="javascript:void(0);">
+														<img src="app/assets/images/add-photo.png" alt="" titile="" />
+														<span class="photo-span-file">Add Photo</span>
+														<div class="photo-panel-add-file"><!-- <input type="file" file-model="myFile" required/> -->
+														<input type="file" ng-file-select="onFileSelect($files)" required/> 
+													</div>
+													</a>
+												</div>
+												<!--add photo file -->
+											</div>
+
+											<div class="write-reply-press-panel">
+												<div class="write-replay-press-button" data-ng-show="emptyMessageError"><font  color="red" >{{createMessageerror}}</font></div>
+												<div class="write-replay-press-button"><img src="app/assets/images/ajax-loader.gif" data-ng-show="createMessageshow" />
+													<button data-ng-hide="createMessageshow" type="button" class="btn btn-primary" href="javascript:void(0);" data-ng-click="createMessage()"><i class="fa fa-comment"></i></button>
+													</div>
+											</div>
+										</div>
+									</div>
+									<!--write-text a panel white-->
+								</div>
+							</div>
+						</div>
+					</div>			
+					<!--middler section-->
+				</div>
+			</div>
+			<div class="col-md-4 col-lg-4">
+				<profile-right-panel></profile-right-panel>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div class="clearfix"></div>

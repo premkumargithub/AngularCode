@@ -1,0 +1,122 @@
+
+<!-- Main Container Fluid -->
+
+<div class="container-fluid register-sixth-container"> 
+
+	<!--register sixth continent-->
+	<div class="broker-sixth-one-step">
+		<div class="register-sixth-continent-form-section">
+			<!--register left panel-->
+			<div class="register-sixth-one-step-section">
+			<div class="register-one-step-change-world">Totale economia spostata</div>
+				<!--ticker-->
+				<div class="titleCouter">
+					<div style="margin-left:0px;text-shadow:0 1px 1px #969696" class="blueFont"> TOTALE ECONOMIA SPOSTATA </div>
+					<div class="contatore">
+					<div style="background-position: 0px -0px; " class="digitCounter"></div>
+					<div style="background-position: 0px -0px; " class="digitCounter"></div>
+					<div style="background-position: 0px -0px;  margin-right:5px; " class="digitCounter"></div>
+					<div style="background-position: 0px -0px; " class="digitCounter"></div>
+					<div style="background-position: 0px -75px; " class="digitCounter"></div>
+					<div style="background-position: 0px -151px;  margin-right:5px; " class="digitCounter"></div>
+					<div style="background-position: 0px -227px; " class="digitCounter"></div>
+					<div style="background-position: 0px -303px; " class="digitCounter"></div>
+					<div style="background-position: 0px -454px;  margin-right:5px; " class="digitCounter"></div>
+					<div class="symbolEuro"></div>
+					<br>
+					<br>
+					</div>
+				</div>
+				<!--ticker-->
+				
+				<div class="register-one-step-change-dei">Esistono innumerevoli variazioni dei passaggi</div>
+				
+			</div>
+			<!--register left panel-->
+			
+			<div class="register-sixth-continent-one-step">
+			
+				<div class="register-sixth-one-step-num register-sixth-one-step-active">
+					<ul>
+						<li><span>1</span> <p>This Step is Active</p></li>
+						<li class="active-one-step"><span>2</span> <p>This Step is Active</p></li>
+					</ul>
+				</div>
+				<div class="msg" style="color:green">{{brokerMsg}}</div>
+				<form name="user" data-ng-submit="registerMultiProfile()">
+					<ul class="register-sixth-one-step-field">
+						<li>
+							<div class="register-sixth-one-step-half">
+								<input type="number" value="" placeholder="Phone" ng-model="user.phone" required/>
+							</div>
+							
+							<div class="register-sixth-two-step-half">
+								<input type="text" value="" placeholder="Vat Number" ng-model="user.vat" required/>
+							</div>
+						</li>
+						
+						<li>
+							<div class="register-sixth-one-step-full">
+								<input type="text" value="" placeholder="Fiscal Code" ng-model="user.fiscal" required/>
+							</div>
+						</li>
+
+						<li>
+							<div class="register-sixth-one-step-full">
+									<input type="text" value="" placeholder="IBAN" ng-model="user.iban" required/>
+							</div>
+						</li>
+
+						<li>
+							<div class="register-sixth-one-step-full">
+									<input type="text" value="" id="mapplace" placeholder="Map Place" ng-model="user.place" required readonly/>
+							</div>
+						</li>
+
+						<li>
+							<div class="register-sixth-one-step-full">
+									<input type="text" id="lat" value="" placeholder="Latitutde" ng-model="user.lat" required readonly/>
+							</div>
+						</li>
+
+						<li>
+							<div class="register-sixth-one-step-full">
+									<input type="text" id="lon" value="" placeholder="Longitude" ng-model="user.lon" required readonly/>
+							</div>
+						</li>
+
+
+						
+					</ul>
+					
+					<div class="location-map">
+					<autocomplete-map></autocomplete-map>
+					</div>
+					
+					<div class="register-sixth-one-step-button">
+						<div class="resigter-one-step-button-right"><input type="submit" name="" data-ng-hide="brokerloader" value="Submit" /></div>
+						<span class="ng-hide" data-ng-show="brokerloader"><img titile="" alt="" src="app/assets/images/ajax-loader.gif"></span>
+					</div>
+					
+				</form>
+			</div>		
+		</div>	
+	</div>
+	<!--register sixth continent-->	
+	
+	<!--footer-->
+	<footer-logout></footer-logout>
+<!--footer-->
+
+ <!-- Footer -->
+  <div id="footer" class="hidden-print"> 
+    
+    <!--  Copyright Line -->
+    <div class="copy">&copy; 2012 - 2014 - <a href="http://www.mosaicpro.biz">MosaicPro</a> - All Rights Reserved. <a href="http://themeforest.net/?ref=mosaicpro" target="_blank">Purchase Social Admin Template</a> - Current version: v2.0.0-rc8 / <a target="_blank" href="../assets/../../CHANGELOG.txt?v=v2.0.0-rc8">changelog</a></div>
+    <!--  End Copyright Line --> 
+    
+  </div>
+  <!-- // Footer END --> 
+  
+</div>
+<!-- // Main Container Fluid END --> 

@@ -1,0 +1,36 @@
+<aside data-ng-controller="ClubSpecificationNotification">
+	<div class="invita-amici">
+		<div class="adver-mutal">
+			<div class="adver-mutal-section">
+				<h1>Club join notifications</h1>
+			</div>
+			<div class="adver-mutal-second">
+			<div class="people-you-may-know-panel">
+				<div class="people-may-see-all"><a href="javascript:void(0)"></a></div>
+			</div>
+			<ul class="adver-mutal-friend" data-ng-show="NotificationFound">
+			<li data-ng-repeat="item in notifications">
+				<div class="adver-mutal-friend-img" data-ng-if = "item.sender_info.profile_image_thumb != ''"><img style="width:64px; height:64px;" data-ng-src="{{item.sender_info.profile_image_thumb}}" alt="" titile="" />
+				</div>
+				<div class="adver-mutal-friend-img" data-ng-if = "item.sender_info.profile_image_thumb == ''" ><img src="app/assets/images/dummy60X60.jpg" alt="" titile="" />
+				</div>
+				<div class="adver-mutual-friend-right-section">
+					<h3><a href="#viewfriend/{{item.sender_info.id}}" title="Show user profile">{{item.sender_info.first_name}} {{item.sender_info.last_name}}</a></h3>
+					<h4>From - <a ng-if="item.group_type == 1" href="#/club/view/{{item.group_id}}/{{item.group_type}}" title="View this club">{{item.group_name}}</a>
+					<a ng-if="item.group_type == 2" href="javascript:void(0)" title="Accept first">{{item.group_name}}</a>
+					</h4>
+					<h4><span ng-if="item.group_type == 1">(Public)</span><span ng-if="item.group_type == 2">(Private)</span></h4>
+					<div class="adver-mutal-add-friend" id="noti-{{$index}}">
+						<input type="button" value="Accept" ng-click="acceptRequest(item.sender_id, item.request_id, item.group_id, item.group_type, $index)"/>
+						<input type="button" value="Reject" ng-click="rejectRequest(item.sender_id, item.request_id, item.group_id, item.group_type, $index)"/>
+					</div>
+				</div>
+			</li>
+			</ul>
+			<div data-ng-show="NotificationNotFound">
+			No notificatoins available
+			</div>
+			</div>
+		</div>
+	</div>
+</aside>

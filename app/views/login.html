@@ -1,0 +1,42 @@
+<!-- Content START -->
+<div id="content"> 
+    <!-- <div class="layout-app col-fs">  -->
+    <div class="layout-app col-fs">
+        <div class="row row-app">
+            <div class="col-md-12">
+                <div class="col-separator col-separator-first box col-unscrollable col-fs">
+                    <div class="col-table">
+                        <div class="col-table-row">
+                            <div class="col-app col-unscrollable tab-content">
+                                <div class="col-app lock-wrapper lock-bg-1 tab-pane active animated fadeIn" id="lock-1-1">
+                                <h3 data-ng-hide="loginStart" class="text-white innerB text-center">Account Access</h3>
+                                    <div class="lock-container">
+                                    <div data-ng-show="loginStart" style="text-align: center;">
+                                    <img src="app/assets/images/login-loader.gif" alt="loading..." />
+                                    </div>
+                                    <div class="login-error" style="text-align: center; color: red;" data-ng-show="loginError">{{loginErrorMsg}}</div>
+                                    <form data-ng-hide="loginStart" method="POST" data-ng-submit="getLogin()">
+                                        <div class="innerAll text-center"> 
+                                            <img src="app/assets/images/22.jpg" class="img-circle"/>
+                                            <div class="innerLR">
+                                                <input class="form-control text-center bg-gray" type="text" placeholder="Username" data-ng-model="user.userName" required/>
+                                                <input class="form-control text-center bg-gray" type="password" placeholder="Enter Password" data-ng-model="user.password" required/>
+                                            </div>
+                                            <div class="innerT"> 
+                                            <button type="submit" class="btn btn-primary" value="">Login <i class="fa fa-fw fa-unlock-alt"></i>
+                                            </button>
+                                            <a href="#/registration" class="btn btn-primary">Sign Up <i class="fa fa-fw fa-user"></i></a>
+                                            </div>
+                                            <a ng-href="#/{{'forgotpassword'}}" class="btn margin-none">Forgot password?</a> 
+                                        </div>
+                                    </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

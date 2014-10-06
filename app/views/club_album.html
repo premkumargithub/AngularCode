@@ -1,0 +1,77 @@
+<div class="col-2-layout">
+<!-- Content START -->
+<div id="content" class="container-right-fluid-page">
+	<div class="innerAll">
+	<div class="row">
+		<div class="col-lg-8 col-md-8" >
+		<div class="inner-container">
+			<div class="album-section-left">
+				<div class="album-section-container-top">
+					<div class="album-online">
+						<span class="album-status"><img titile="" alt="" src="app/assets/images/album.png"></span> Club Albums 
+					</div>
+					<ul class="album-action-message">
+						<li class="button-default"><a href="javascript:void(0)" ng-click="showAlbumForm();">Create Album</a></li>
+						<li class="last button-default"><a href="#/club/view/{{groupId}}/{{groupType}}">Back to Club</a></li>
+					</ul>
+				</div>
+				<div class="create-album" data-ng-show="createAlbumForm">
+					<form action="javascript:void(0)" ng-submit="createClubAlbum();">
+					<div ng-show="createSuccess" class="successMessage">{{successMessage}}</div>
+						<ul>
+							<li>
+								<span>Album Name</span>
+								<input type="text" class="form-control bg-gray" ng-model="CreateAlbum.albumName" required multiple/>
+							</li>
+							<li>
+								<span>Album Description</span>
+								<textarea class="form-control bg-gray" ng-model="CreateAlbum.description" required></textarea>
+							</li>
+							<li>
+								<button data-ng-hide="CreateAlbumStart" type="submit" class="btn btn-primary">Create Album <i class="fa fa-fw fa-plus"></i></button>
+								<a data-ng-hide="CreateAlbumStart" class="btn btn-primary" ng-click="showAlbumForm()">Cancel <i class="fa fa-fw fa-times"></i>
+								</a>
+								<div data-ng-show="CreateAlbumStart" class="loader-container">
+								<img src="app/assets/images/ajax-loader.gif" alt="loading..." />
+								</div>
+							</li>
+						</ul>
+					</form>
+				</div>
+				<div data-ng-show="clubAlbumLoading" class="loader-container">
+					<img src="app/assets/images/ajax-loader.gif" alt="loading..." />
+				</div>
+				<div class="album-option-container" data-ng-hide="clubAlbumLoading" >
+					<ul class="album-option" ng-if="clubAlbumData.length">
+						<li data-ng-repeat="item in clubAlbumData">
+							<a href="javascript:void(0)">
+								<div ng-if="!item.album_featured_image" class="album-option-img" ng-click="redirectUrl(item.id, item.album_name)">
+									<span style="background-image:url('app/assets/images/album-empty.jpg');"></span>
+									<!--<img titile="" alt="" src="app/assets/images/album-empty.jpg">--></div>
+								<div ng-if="item.album_featured_image" class="album-option-img" ng-click="redirectUrl(item.id, item.album_name)">
+								<span style="background-image:url('{{item.album_featured_image}}');"></span>
+									<!--<img titile="" alt="" src="{{item.album_featured_image}}" width="158" height="128">--></div>
+								<div class="album-option-heading"><span ng-click="redirectUrl(item.id, item.album_name)">{{item.album_name}}</span>
+									<span id="deleteStart-{{$index}}" class="album-option-delete" ng-click="confirmClick() && deleteClubAlbum(item.id, $index)" confirm-click><i class="fa fa-fw fa-times" title="Delete Album"></i>
+									</span>
+									<span style="display:none;" id="deleteStartLoader-{{$index}}"><img src="app/assets/images/ajax-loader.gif" alt="loading..." /></span>
+								</div>
+								<div class="album-option-sub" ng-click="redirectUrl(item.id, item.album_name)">{{item.media_in_album}} Photos</div>
+							</a>
+						</li>
+					</ul>
+					<div ng-if="!clubAlbumData.length">
+						There are no albums in the list, Please Create Album.
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class="col-lg-4 col-md-4">
+			<profile-right-panel></profile-right-panel>
+		</div>
+	</div>
+	</div>
+</div>
+<div class="clearfix"></div>
+</div>

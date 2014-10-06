@@ -1,0 +1,26 @@
+<div class="store-commnet-type" >
+	{{commentErrMsg}}
+	<div class="store-comment-upload-img"><a href="javascript:void(0)"><img src="app/assets/images/store-commnet-upload.jpg" alt="" titile="" /></a></div>
+	<div class="store-commnet-typearea">
+		<form>
+			<div class="add-photo-comment">
+				<label for="file"><i class="fa fa-picture-o"></i></label>
+				<input type="file" ng-file-select="onFileSelect($files)" class="search-botton" />
+			</div>
+			<textarea name="Write a comment" placeholder="Write a comment" data-ng-model="commentText" submit-enter="addComment()" ></textarea>
+			<div class="input-group-btn">
+				<button type="button" class="btn btn-primary" href="javascript:void(0);" data-ng-click="addComment()"><i class="fa fa-comment"></i></button>
+			</div>
+		</div>
+		</form>
+		<div class="preview-images">
+		<div ng-show="imgSrc" ng-repeat="img in imgSrc track by $index" class="preview-image-list">
+			<img ng-src="{{img}}" width="100" height="100" style="padding:10px;" />
+			<i data-ng-click="removeImage($index)" class="fa fa-fw fa-times" title="Remove"></i>
+		</div>
+	</div>
+	</div>
+</div>
+<div data-ng-show="{{commentInProcess}}" style="text-align: center;">
+	<img src="app/assets/images/ajax-loader.gif" alt="posting comment..." />
+</div>

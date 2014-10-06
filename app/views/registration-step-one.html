@@ -1,0 +1,110 @@
+<div class="container-fluid register-sixth-container"> 
+
+	<!--register sixth continent-->
+	<div class="register-sixth-one-step">
+		<div class="register-sixth-continent-form-section">
+			<!--register left panel-->
+			<div class="register-sixth-one-step-section">
+			<div class="register-one-step-change-world">Totale economia spostata</div>
+				<!--ticker-->
+				<div class="titleCouter">
+					<div style="margin-left:0px;text-shadow:0 1px 1px #969696" class="blueFont"> TOTALE ECONOMIA SPOSTATA </div>
+					<div class="contatore">
+					<div style="background-position: 0px -0px; " class="digitCounter"></div>
+					<div style="background-position: 0px -0px; " class="digitCounter"></div>
+					<div style="background-position: 0px -0px;  margin-right:5px; " class="digitCounter"></div>
+					<div style="background-position: 0px -0px; " class="digitCounter"></div>
+					<div style="background-position: 0px -75px; " class="digitCounter"></div>
+					<div style="background-position: 0px -151px;  margin-right:5px; " class="digitCounter"></div>
+					<div style="background-position: 0px -227px; " class="digitCounter"></div>
+					<div style="background-position: 0px -303px; " class="digitCounter"></div>
+					<div style="background-position: 0px -454px;  margin-right:5px; " class="digitCounter"></div>
+					<div class="symbolEuro symbolEuro1"></div>
+					<br>
+					<br>
+					</div>
+				</div>
+				<!--ticker-->
+				
+				<div class="register-one-step-change-dei">Esistono innumerevoli variazioni dei passaggi</div>
+				
+			</div>
+			<!--register left panel-->
+			
+			<div class="register-sixth-continent-one-step clearfix">
+			
+				<div class="register-sixth-one-step-num">
+					<ul>
+						<li><span>1</span> <p>This Step is Active</p></li>
+						<li class="active-one-step"><span>2</span> <p>This Step is Active</p></li>
+					</ul>
+				</div>
+				<div class="errormsg reg-param">{{signUpSuccessMsg}}</div>
+				<form name="user" data-ng-submit="registration('')">
+					<ul class="register-sixth-one-step-field">
+						<li>
+							<div class="register-sixth-one-step-half">
+								<input type="email" data-ng-model="user.userEmail" placeholder="Email" title="Email"required/>
+							</div>
+							
+							<div class="register-sixth-two-step-half">
+								<input type="password" value="" data-ng-model="user.userPassword" placeholder="Password" data-ng-minlength="6" title="Password"required/>
+							</div>
+						</li>
+						
+						<li>
+							<div class="register-sixth-one-step-half">
+								<input type="text" value="" placeholder="First Name" data-ng-model="user.firstName" 
+								title="firstname" required/>
+							</div>
+							
+							<div class="register-sixth-two-step-half">
+								<input type="text" value="" placeholder="Last Name" title="lastname" data-ng-model="user.lastName" required/>
+							</div>
+						</li>
+						<li class="calender-gender">
+							<div class="register-sixth-one-step-half">
+								<div class="register-sixth-select-birth">
+ 									<input type="text" placeholder="Date of Birth" class="form-control" datepicker-popup="{{format}}" ng-model="user.dob" id="userdob" is-open="opened" datepicker-opti ons="'dd-mm-yyyy'" ng-required="true" readonly=""/>
+									<span class="calendar-icon"></span>
+								</div>
+							</div>
+							<div class="register-sixth-two-step-half">
+								<div class="register-sixth-select-gender">
+									<select data-ng-model="user.gender">
+										<option value="">Gender</option>
+										<option value="m">Male</option>
+										<option value="f">Female</option>
+									</select>
+								</div>
+							</div>
+						</li>						
+						<li>
+							<div class="register-sixth-one-step-full">
+								<div class="register-sixth-one-step-select-country">
+									<select ng-model="user.country" ng-options="country.country for country in countries" title="select country" required>
+								 <option value="">Country</option>
+								</select>
+								</div>
+							</div>
+						</li>
+						
+					</ul>
+					
+					<div class="register-sixth-one-step-button">
+						<div class="resigter-one-step-button-right"><input type="submit" data-ng-show="showLoading" name=""  value="Next Step" /></div>
+						<img data-ng-hide="showLoading"src="app/assets/images/ajax-loader.gif">
+						</div>
+					</div>
+					
+				</form>
+			</div>		
+		</div>	
+	</div>
+	<!--register sixth continent-->	
+	
+	<!--footer-->
+	<footer-logout></footer-logout>
+<!--footer-->
+<div ng-include="app/views/footer.html"></div>  
+</div>

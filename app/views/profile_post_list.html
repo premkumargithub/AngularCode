@@ -1,0 +1,189 @@
+<!-- Widget -->
+<div class="widget gridalicious-item not-responsive profile-post-wrapper" data-ng-repeat = "(postIndx,post) in userPostList" data-ng-init="getComments(postIndx)" data-ng-hide="isDeletePost[postIndx] || {{isLoading}}">
+	<span class="errorMsg">{{deleteErrMsg[postIndx]}}</span>
+	<div class="post-upper-section">
+		<div class="post-heading" >
+			<div class="media clearfix"> <a ng-href="#/viewfriend/{{post.user_info.id}}" class="pull-left">
+				<img data-ng-if="post.user_info.profile_image_thumb == ''" src="app/assets/images/dummy60X60.jpg" width="55" height="55" class="media-object">
+				<img data-ng-if="post.user_info.profile_image_thumb != ''" src="{{post.user_info.profile_image_thumb}}" width="55" height="55" class="media-object">
+			</a>
+			<div class="media-body innerTB half clearfix"> 
+				<ul class="actions-store-dp" data-ng-if = "post.user_id == currentUser.id">
+					<li>
+						<a><span class="edit-dele"></span></a>
+						<ul class="actions-drop-action">
+							<li data-ng-if="post.link_type != 1" class="check"> <a href="javascript:void(0);"  data-ng-click="updatePost(postIndx)">Modify</a> </li>
+							<li> <a href="javascript:void(0);" data-ng-click= "confirmClick() && deletePost(postIndx)" confirm-click>Delete</a> </li>
+						</ul>
+					</li>
+				</ul>
+				<div class="post-head-title">
+					<a ng-href="#/viewfriend/{{post.user_info.id}}" data-ng-if="post.user_info.first_name == ''" class="strong">{{post.user_info.email}}</a> 
+					<a ng-href="#/viewfriend/{{post.user_info.id}}" data-ng-if="post.user_info.first_name != ''" class="strong">{{post.user_info.first_name}} {{post.user_info.last_name}}</a> 
+					<span><i class="fa fa-star"></i>{{post.created_at | date : 'dd-MM-yyyy HH:mm:ss'}}</span> 
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Content -->
+	<div class="post-desc">
+		<div class="postedit">
+			<p data-ng-hide="activeEdit[postIndx]" ng-repeat="line in (post.description | newlines)" ng-bind-html="line | unsafe"></p>
+			<!-- code for update post-->
+			<div class="testata-right-section testata-textarea" data-ng-show="activeEdit[postIndx]">
+				<form name="edit-post">
+					<span class="errorMsg">{{editPostErrorMsg[postIndx]}}</span>
+					<textarea rows="12" cols="15" class="editpostbox" placeholder="Scrivi un post" ng-model="updateBody[postIndx]"></textarea>
+					<div class="pull-right btn-container" data-ng-hide="updatePostInProcess[postIndx]">
+						<a class="button" href= "javascript:void(0);" data-ng-click="saveUpdatePost(postIndx)"> Finished editing</a>
+						<a class="button" href= "javascript:void(0);" data-ng-click="cancelPost(postIndx)">Cancel</a>
+					</div>
+				</form>
+				<div data-ng-show="updatePostInProcess[postIndx]"><show-progress></show-progress></div>
+			</div>
+			<div ng-switch="post.media_info.length" data-ng-if="post.media_info.length > 0">
+				<div class="post-img" ng-switch-when="1">
+					<a href="{{post.media_info[0].media_link}}" class="fancybox" style="background-image:url('{{post.media_info[0].media_link}}');">
+					</a> 
+				</div>
+				<!-- for two image-->
+				<div class="post-img" ng-switch-when="2">
+					<ul class="post-two-image clearfix">
+						<li>
+							<a href="{{post.media_info[0].media_link}}" class="fancybox" style="background-image:url('{{post.media_info[0].media_link}}');">
+							</a> 
+						</li>
+						<li class="post-img-last">
+							<a href="{{post.media_info[1].media_link}}" class="fancybox" style="background-image:url('{{post.media_info[1].media_link}}');">
+							</a> 
+						</li>
+					</ul>
+				</div>
+				<!-- for three image-->
+				<div class="post-img" ng-switch-default>
+					<ul class="post-three-image clearfix">
+						<li>
+							<a href="{{post.media_info[0].media_link}}" class="fancybox" rel="maingallery" style="background-image:url('{{post.media_info[0].media_link}}');">
+							</a> 
+						</li>
+						<li class="two-img">
+							<a href="{{post.media_info[1].media_link}}" class="fancybox three-img-first" rel="maingallery" style="background-image:url('{{post.media_info[1].media_link}}');">
+							</a> 
+							<a href="{{post.media_info[2].media_link}}" class="fancybox" rel="maingallery" style="background-image:url('{{post.media_info[2].media_link}}');">
+							</a> 
+						</li>
+					</ul>
+				</div>
+				<!-- for four image-->
+				<div class="post-img" ng-switch-when="4">
+					<ul class="post-four-image clearfix">
+						<li>
+							<a href="{{post.media_info[0].media_link}}" class="fancybox" style="background-image:url('{{post.media_info[0].media_link}}');">
+							</a> 
+						</li>
+						<li class="three-img">
+							<a href="{{post.media_info[1].media_link}}" class="fancybox first-img" style="background-image:url('{{post.media_info[1].media_link}}');">
+							</a>
+							<a href="{{post.media_info[2].media_link}}" class="fancybox second-img" style="background-image:url('{{post.media_info[2].media_link}}');">
+							</a>
+							<a href="{{post.media_info[3].media_link}}" class="fancybox third-img" style="background-image:url('{{post.media_info[3].media_link}}');">
+							</a> 
+						</li>
+					</ul>
+				</div>
+				<!-- for five image-->
+				<div class="post-img" ng-switch-when="5">
+					<ul class="post-five-image">
+						<li>
+							<a href="{{post.media_info[0].media_link}}" class="fancybox" style="background-image:url('{{post.media_info[0].media_link}}');">
+							</a>
+						</li>
+						<li class="four-img">
+							<a href="{{post.media_info[1].media_link}}" class="fancybox" style="background-image:url('{{post.media_info[1].media_link}}');">
+							</a>
+							<a href="{{post.media_info[2].media_link}}" class="fancybox" style="background-image:url('{{post.media_info[2].media_link}}');">
+							</a>
+							<a href="{{post.media_info[3].media_link}}" class="fancybox" style="background-image:url('{{post.media_info[3].media_link}}');">
+							</a>
+							<a href="{{post.media_info[4].media_link}}" class="fancybox fourth-img" style="background-image:url('{{post.media_info[4].media_link}}');">
+							</a>
+						</li>
+					</ul> 
+				</div>
+			</div>
+			<!-- stop post image listing-->
+		</div> 
+	</div> 
+	<!-- Comment -->
+	<div class="view-comments clearfix">
+		<img src="app/assets/images/comment-icon.png" data-ng-if="post.comments.length >= 1" data-ng-hide="showComments[postIndx]"><a class="text-primary" href="javascript:void(0);" data-ng-click="showAllComments(postIndx)" data-ng-if="post.comments.length >= 1" data-ng-hide="showComments[postIndx]">View All comments</a>
+		<span class="pull-right">{{post.comments.length}} comments</span></div>
+
+	</div>
+	<!-- First Comment -->
+	<div data-ng-show="{{commentLoading[postIndx]}}" style="text-align: center;">
+		<show-progress></show-progress>
+	</div>
+	<div data-ng-hide="{{commentLoading[postIndx]}}">
+		<div class="media border-bottom margin-none comments-listing"
+		data-ng-show="showComments[postIndx] || (commentsLength[postIndx] - commentsShowLimit[postIndx] - 1) < indx"
+		data-ng-repeat="(indx,comment) in post.comments | orderBy:'id'"> 
+		<div>
+			<a href="#/viewfriend/{{comment.comment_user_info.id}}" class="pull-left">
+				<img data-ng-if="comment.comment_user_info.profile_image_thumb == ''" src="app/assets/images/dummy60X60.jpg" width="38" height="38" class="media-object">
+				<img data-ng-if="comment.comment_user_info.profile_image_thumb != ''" data-ng-src="{{comment.comment_user_info.profile_image_thumb}}" width="38" height="38" class="media-object">
+			</a>
+			<div class="media-body">
+				<span class="pull-right" data-ng-if = "comment.user_id == currentUser.id">
+					<i class="fa fa-fw fa-times" 
+					data-ng-click="confirmClick() && deleteComment(postIndx,comment)" confirm-click></i>
+					<i class="fa fa-pencil-square-o"  data-ng-click="updateComment(postIndx,comment)"></i>
+				</span>
+				<a href="#/viewfreinds/comment.comment_user_info.id" data-ng-if="comment.comment_user_info.first_name == ''">{{comment.comment_user_info.email}}</a> 
+				<a href="#/viewfreinds/comment.comment_user_info.id" data-ng-if="comment.comment_user_info.first_name != ''">{{comment.comment_user_info.first_name}} {{comment.comment_user_info.last_name}}</a>
+				<span class="post-date">{{comment.create_date | date : 'mediumDate'}}</span>
+				<p>{{comment.comment_text}}</p>
+				<!-- update comment form start -->
+
+				<!-- update comment form-->
+				<div class="input-group comment-edit" data-ng-if="activeCommentEdit[postIndx] == comment.id">
+					<span class="errorMsg">{{commentErrorMsg[postIndx]}}</span>
+					<div class="comment-input">
+						<input type="text" class="form-control" ng-model="editCommentText[postIndx]"  placeholder="Your comment here...">
+						<div class="input-group-btn">
+
+						</div>
+						<div class="pull-right btn-container" data-ng-hide="isEditComment[postIndx]"  >
+							<a class="button" href= "javascript:void(0);" data-ng-click="editComment(postIndx, comment)"> Finished editing</a>
+							<a class="button" href= "javascript:void(0);" data-ng-click="cancelEditComment(postIndx, comment)">Cancel</a>
+						</div>
+						<div data-ng-show="isEditComment[postIndx]" style="text-align: center;">
+							<show-progress></show-progress>
+						</div>
+					</div>
+				</div>
+				<!-- update comment form end -->
+				<ul class="post-comment-munti">
+					<li data-ng-repeat="image in comment.comment_media_info">
+						<a href="{{image.media_link}}" class="fancybox" style="background-image:url({{image.media_link}});">
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div data-ng-if="comment.id == deleteCommentIndx" style="text-align: center;">
+				<show-progress></show-progress>
+			</div>
+		</div>
+	</div>
+	<profile-comment-form id="commentBoxId-{{postIndx}}" post-id="{{post.id}}" post-indx ="{{postIndx}}"></profile-comment-form>
+</div>
+	<div data-ng-show="isDeletePost[postIndx]">
+		<show-progress></show-progress>
+	</div>
+</div>
+<div class="project" data-role="tile" data-ng-show="{{noContent}}">
+	<strong>No results found...</strong>
+</div>
+<div data-ng-show="isLoading" style="text-align: center;">
+	<show-progress></show-progress>
+</div>

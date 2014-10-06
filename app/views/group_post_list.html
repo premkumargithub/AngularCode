@@ -1,0 +1,128 @@
+<!--store comment view section-->
+<div class="store-comment-section" data-ng-repeat="(postIndx, post) in posts" ng-init="showLimitedComment(postIndx)">
+	<div class="store-comment-view">
+
+		<div class="sotre-comment-view-left-panel">
+			<div class="store-comment-view-img">
+				<a href="javascript:void(0)">
+				<img data-ng-if="post.user_profile.profile_image_thumb == ''" src="app/assets/images/dummy60X60.jpg" alt="" titile="" />
+				<img data-ng-if="post.user_profile.profile_image_thumb != ''" data-ng-src="{{post.user_profile.profile_image_thumb}}" width="52" alt="" titile="" />
+			</a>
+			</div>
+			<div class="store-comment-view-profile">
+				<h2 data-ng-if="post.user_profile.first_name == ''">{{post.user_profile.email}}</h2>
+				<h2 data-ng-if="post.user_profile.first_name != ''">{{post.user_profile.first_name}} {{post.user_profile.last_name}}</h2>
+				<h3>{{post.post_created | date : 'MMMM d, yyyy'}}</h3>
+			</div>
+			<ul class="actions-store-dp" data-ng-if="groupDetail.owner_id == currentUser.id">
+                <li>
+                	<a><span class="edit-dele"></span></a>
+                		<ul class="actions-drop-action">
+                		<li> <a href="javascript:void(0);"  data-ng-click="updatePost(postIndx)">Modifica</a> </li>
+                		<li> <a href="javascript:void(0);" data-ng-click= "confirmClick() &&deletePost(postIndx)" confirm-click>Elimina</a> </li>
+                	</ul>
+                </li>
+            </ul>
+		</div>
+
+		<div class="store-comment-profile-upload" data-ng-hide="activeEdit[postIndx]">{{post.post_description}}</div>
+			<!-- code for update post-->
+                <div class="testata-right-section" data-ng-show="activeEdit[postIndx]">
+                <form name="edit-post">
+                    <span>{{editpostErrorMsg}}</span>
+                   <textarea rows="12" cols="15" class="editpostbox" placeholder="Scrivi un post" ng-model="updateBody[postIndx]"></textarea>
+                   <div class="pull-right btn-container">
+                        <a class="button" href= "javascript:void(0);" data-ng-click="saveUpdatePost(postIndx)"> Finished editing</a>
+                        <a class="button" href= "javascript:void(0);" data-ng-click="cancelPost(postIndx)">Cancel</a>
+                    </div>
+                </form>
+                </div>
+                <div data-ng-show="{{updatePostInProcess}}" style="text-align: center;">
+                    <img src="app/assets/images/ajax-loader.gif" alt="posting..." />
+                </div>
+                <!-- code for update post-->
+			<div class="store-comment-profile-big" data-ng-if="post.media_info.length !=0">
+				<a href="{{post.media_info[0].media_path}}" class="fancybox">
+						<img data-ng-src="{{post.media_info[0].media_path}}" alt="" titile="" width="862" height="253" />
+					</a>
+			</div>
+
+			<!-- <div class="store-comment-like">
+				<input type="button" name="button" value="Comments" class="store-comment-btn" />
+				<input type="button" name="button" value="Like" class="store-like-btn" />
+			</div> -->
+			<!-- TODO: currently service is accepting only one image in post -->
+			<ul class="store-commnet-slide-thumb" data-ng-if="post.media_info.length >1">
+					<li data-ng-repeat="(mediaIndx, media) in post.media_info" data-ng-if="mediaIndx != 0">
+						<img src="{{media.media_path}}" width="183" height="137" alt="" titile="" />
+					</li>
+				</ul> 
+
+			<!-- <div class="store-poeple-likes"><a href="javascript:void(0)"><img src="app/assets/images/store-people-likes.png" alt="" titile="" />4,320 people</a> like this.</div> -->
+
+
+			<div class="store-poeple-likes-comm" data-ng-if="comments[postIndx].length > 1"><a href="javascript:void(0)" data-ng-click="showAllComment()"><img src="app/assets/images/store-people-comments.png" alt="" titile="" />View previous comments</a> 
+				<span class="store-people-commnets-number" data-ng-if="comments[postIndx].length > 0"> 1 of {{comments[postIndx].length}}</span>
+				<p class="store-people-commnets-number errorMsg">{{commentErrorMsg}}</p>
+
+			</div>
+
+			<div class="sotre-comment-upload-left-panel" data-ng-repeat="(indx, comment) in comments[postIndx]">
+				<div class="store-comment-upload-img"><a href="javascript:void(0)">
+					<img data-ng-if="comment.comment_author.profile_image_thumb == ''" src="app/assets/images/dummy32X32.jpg" alt="" titile="" />
+				<img data-ng-if="comment.comment_author.profile_image_thumb != ''" data-ng-src="{{comment.comment_author.profile_image_thumb}}" width="32" alt="" titile="" />
+				</a></div>
+				<div class="store-comment-upload-profile">
+					<h2 data-ng-if="comment.comment_author.first_name == ''">{{comment.comment_author.email}}</h2>
+					<h2 data-ng-if="comment.comment_author.first_name != ''">
+						{{comment.comment_author.first_name}} {{comment.comment_author.last_name}}
+					</h2>
+					<h3>{{comment.comment_updated_at | date : 'MMMM d, yyyy'}}</h3>
+				</div>
+				<div class="store-post-del-comm">
+					<!-- TODO:: multiple file for comment -->
+                    <!-- <i class="fa fa-fw fa-times ng-isolate-scope" click-delete="" delete-method="deleteComment(comment,postIndx)"></i>
+                    <i class="fa fa-fw fa-times ng-isolate-scope" click-delete="" delete-method="deleteMediaComment(comment,postIndx,0)">delete media comment</i> -->
+                    <ul class="store-comm-action" data-ng-if="groupDetail.owner_id == currentUser.id">
+                		<li> <a href="javascript:void(0);"  data-ng-click="updateComment(postIndx, indx, comment)">Modifica</a> </li>
+                		<li> <a href="javascript:void(0);" data-ng-click= "confirmClick() && deleteComment(postIndx, indx)" confirm-click>Elimina</a> </li>
+                	</ul>
+                </div>
+                <div class="comment-text" data-ng-if="activeCommentEdit[postIndx][indx] != indx">{{comment.comment_text}}
+					<p data-ng-if="comment.media_original_path != ''">
+						<a href="{{comment.media_original_path}}" rel="maingallery" class="fancybox"><img data-ng-src="{{comment.media_thumb_path}}" alt="loading..." /></a>
+						</p>
+
+				</div>
+				<!--updated comment start-->
+                <div class="editcomment" data-ng-if="activeCommentEdit[postIndx][indx] == indx">
+                <form>
+                    
+                <div>
+
+                <div class="add-foto editcomment-field">
+                    <!-- <label for="file"><i class="fa fa-picture-o"></i></label> -->
+                    <!-- <input type="file" id="file" name="file" file-model="myFile" /> -->
+                    <input type="text" name="postcomment" submit-enter="editComment(postIndx,indx,comment)" ng-model="editCommentText[postIndx]" placeholder="aggiungi un commento..." cancel-esc="cancelEditComment(postIndx, indx)">
+                    
+				<button type="button" class="btn btn-primary" href="javascript:void(0);" data-ng-click="editComment(postIndx,indx,comment)"><i class="fa fa-comment"></i></button>
+			
+                    <p>Press esc to close</p>
+                </div>
+                <div data-ng-show="{{postInProcess}}" style="text-align: center;">
+                    <img src="app/assets/images/ajax-loader.gif" alt="posting..." />
+                </div>
+                </div>
+                </form>
+                </div>
+                <!--update comment end-->
+                <div data-ng-if="comment.id == deleteCommentIndx" style="text-align: center;">
+                    <img src="app/assets/images/ajax-loader.gif" alt="deleting..." />
+                </div>
+			</div>
+			</div>
+			<div data-ng-show="groupDetail.is_member">
+			<group-comment-form id="commentBoxId-{{postIndx}}" post-id="{{post.post_id}}" post-indx ="{{postIndx}}" load-comment="showLimitedComment(postIndx)"></group-comment-form>
+			<div>
+	</div>
+	<!--store comment view section-->

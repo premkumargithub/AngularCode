@@ -1,0 +1,120 @@
+<!--Main Sidebar Menu -->
+  <div id="menu" class="hidden-print sidebar-default sidebar-brand-primary">
+    <div id="sidebar-social-wrapper">
+      <div class="profile-wraaper">
+        <span class="ng-hide" ng-show="picloader" style="float:left"><img titile="" alt="" src="app/assets/images/ajax-loader.gif"></span>
+        <div class="updted-profile-section" ng-if="currentUser.basicProfile.profile_img !='' || currentUser.basicProfile.profile_img ==''" >
+        <a class="profile-image fancybox" href="{{currentUser.basicProfile.profile_img.original}}" ng-if="currentUser.basicProfile.profile_img !=''"><img alt="" src="{{currentUser.basicProfile.profile_img.thumb}}" width="200px" height="200px">
+        </a>
+        <div class="update-profile">
+          <a href="#/profileimgupload">
+            <img src="app/assets/images/camera.png" />
+            <div class="update-profile-pic">Update Profile Picture</div>
+          </a>
+        </div>
+        <img ng-if="currentUser.basicProfile.profile_img ==''" alt="" src="app/assets/images/prof-pic.jpg" width="200px" height="200px">
+        <div class="update-profile">
+          <a href="#/profileimgupload">
+            <img src="app/assets/images/camera.png" />
+            <div class="update-profile-pic">Update Profile Picture</div>
+          </a>
+        </div>
+        </div>
+            <a href="javascript:void(0)">
+                <span ng-if="currentUser.basicProfile.firstname">{{currentUser.basicProfile.firstname}} {{currentUser.basicProfile.lastname}}</span>
+                <span ng-if="!currentUser.basicProfile.firstname">{{currentUser.basicProfile.user_id}}</span>
+            </a>
+        </div>
+        <ul class="menu list-unstyled" ng-controller="ProfileImageController">
+<!--<li class="hasSubmenu"> <a href="#/" data-toggle="collapse"> <img src="app/assets/images/dashboard-icon.png" alt=""> <span>Dashboard</span> </a>
+</li> -->
+
+       <li class="hasSubmenu"> <a href="#/about" data-toggle="collapse">
+       <img src="app/assets/images/dashboard-icon.png" alt=""> <span>Profile</span> </a>
+        </li> 
+        <li class="hasSubmenu"> <a href="javascript:void(0)" data-toggle="collapse">
+       <img src="app/assets/images/wallet.png" alt=""> <span>Wallet</span> </a>
+        </li> 
+
+        <li class="hasSubmenu"> <a href="#/message"> 
+            <img src="app/assets/images/messages-icon.png" alt=""><span>Messages</span> <span class="msg-counting" data-ng-show="messageNoti.length">{{count}}</span></a> 
+        </li>
+
+        <li class="hasSubmenu"> 
+            <a href="#album" data-toggle="collapse">
+                <img src="app/assets/images/pictures-icon.png" alt="">
+                <span>Pictures</span>
+            </a>
+        </li>
+        <li class="hasSubmenu"> 
+            <a href="#album" data-toggle="collapse">
+                <img src="app/assets/images/video.png" alt="">
+                <span>Videos</span>
+            </a>
+        </li>
+        <li class="hasSubmenu"> <a href="#club" data-toggle="collapse"> <img src="app/assets/images/clubs-icon.png" alt=""> <span>Clubs</span> </a>
+        </li>
+
+        <li class="hasSubmenu active"> <a href="#shope" data-toggle="collapse"> <img src="app/assets/images/shop-icon.png" alt=""> <span>Shops</span> </a>
+        </li>
+       
+        <!-- <li class="hasSubmenu"> <a href="#about" data-toggle="collapse"> <i class="icon-user-1"></i> <span>About</span> </a>
+        </li>
+        
+        <li class="category border-top"> <span>Skins</span> </li>
+        <li class="reset">
+          <div class="innerLR innerB border-bottom">
+          </div>
+        </li> -->
+      </ul>
+      <ul class="menu list-unstyled list-two" ng-controller="ProfileImageController">
+    <li class="hasSubmenu">
+      <a href="#/friends" data-toggle="collapse">
+                <img src="app/assets/images/friends.png" alt="">
+                <span>Friends</span>
+    </a>
+    </li>
+    <li class="hasSubmenu">
+      <a href="javascript:void(0)" data-toggle="collapse">
+                <img src="app/assets/images/follower.png" alt="">
+                <span>Follower</span>
+            </a>
+        </li>
+  <li class="hasSubmenu">
+      <a href="javascript:void(0)" data-toggle="collapse">
+                <img src="app/assets/images/follows.png" alt="">
+                <span>Follows</span>
+            </a>
+        </li>
+  </ul>
+  <ul class="menu list-unstyled list-two" ng-controller="ProfileImageController">
+    <li class="hasSubmenu">
+    <a href="javascript:void(0)" data-toggle="collapse">
+                <img src="app/assets/images/shop-icon.png" alt="">
+                <span>Shops Affiliated</span>
+    </a>
+    </li>
+    <li class="hasSubmenu">
+      <a href="javascript:void(0)" data-toggle="collapse">
+                <img src="app/assets/images/citizens.png" alt="">
+                <span>Citizens Affiliated</span>
+            </a>
+        </li>
+  <li class="hasSubmenu">
+      <a href="javascript:void(0)" data-toggle="collapse">
+                <img src="app/assets/images/brokers.png" alt="">
+                <span>Brokers Affiliated</span>
+            </a>
+        </li>
+  </ul>
+  <ul class="menu list-unstyled list-two" ng-controller="ProfileImageController">
+    <li class="hasSubmenu">
+    <a href="javascript:void(0)" data-toggle="collapse">
+                <img src="app/assets/images/social.png" alt="">
+                <span>Social Projects</span>
+    </a>
+    </li>
+  </ul>
+    </div>
+  </div>
+  <!-- // Main Sidebar Menu END -->
